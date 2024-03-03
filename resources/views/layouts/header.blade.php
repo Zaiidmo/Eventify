@@ -1,9 +1,9 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-<header class="w-screen bg-transparent">
-    <nav class="container mx-auto w-full flex justify-between items-center h-full px-6 text-gray-600 z-40 py-3 relative">
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script> --}}
+<header class="w-screen bg-transparent my-6 absolute">
+    <nav class="container mx-auto w-full flex justify-between items-center px-6 text-gray-600 z-40 py-3 relative">
 
         <a class="text-2xl flex items-center justify-between font-bold font-salsa text-white">
-            <img src="{{ asset('Logo.png') }}" alt="Eventify Logo" class="w-28"> 
+            <img src="{{ asset('Logo.png') }}" alt="Eventify Logo" class="w-40"> 
         </a>
 
         <div class="lg:hidden">
@@ -16,7 +16,7 @@
         </div>
 
                 <button id="login-btn"
-                    class=" py-1.5 px-8 m-1 text-center bg-primary font-buttons rounded-md text-white lg:inline-block ">
+                    class=" py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block ">
                     Sign In
                 </button>
     </nav>
