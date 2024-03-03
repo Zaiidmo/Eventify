@@ -19,7 +19,7 @@
             </div>
         </div>
     </section>
-    <section class="px-4 mx-auto max-w-screen-xl ">
+    <section class="px-4 mx-auto max-w-screen-xl my-10 ">
         <div class="border-b border-primary bottom-2 flex justify-between items-center my-6">
             <h2 class="text-white font-supermercado text-3xl">Popular Reached Categories</h2>
             <div class="self-center justify-self-end mb-4">
@@ -80,4 +80,109 @@
             </div>
         </div>
     </section>
-@endsection
+    <section class="px-4 mx-auto max-w-screen-xl my-10 ">
+        <div class="border-b border-primary bottom-2 flex justify-between items-center my-6">
+            <h2 class="text-white font-supermercado  text-3xl tracking-wider">Upcoming Events</h2>>
+            <div class="self-center justify-self-end mb-4">
+                <button id="login-btn"
+                    class=" py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block self-center">
+                    See More
+                </button>
+            </div>
+        </div>
+        <div class="flex flex-col gap-4">
+            <div class="flex w-full items-center justify-between rounded-2xl bg-transparent border-2 border-component p-3 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+                <div class="flex items-center">
+                <div class="">
+                    <img
+                    class="h-[83px] w-[83px] rounded-lg"
+                    src="https://github.com/horizon-ui/horizon-tailwind-react-ts-corporate/blob/main/src/assets/img/profile/image1.png?raw=true"
+                    alt=""
+                    />
+                </div>
+                <div class="ml-4">
+                    <p class="text-base font-medium text-navy-700 dark:text-white">
+                    Technology behind the Blockchain
+                    </p>
+                    <p class="mt-2 text-sm text-subtle">
+                    12th March 2022
+                    </p>
+                </div>
+                </div>
+                <div class="mr-4 gap-2 flex flex-col items-center justify-center text-gray-600 dark:text-white">
+                <button class="text-md font-buttons border-2 border-primary rounded-full px-8 py-2">Buy Ticket</button>
+                <button class="text-md font-buttons border-2 border-primary bg-primary rounded-full px-8 py-2">See Details</button>
+                </div>
+            </div>
+            <div class="flex w-full items-center justify-between rounded-2xl bg-transparent border-2 border-component p-3 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+                <div class="flex items-center">
+                <div class="">
+                    <img
+                    class="h-[83px] w-[83px] rounded-lg"
+                    src="https://github.com/horizon-ui/horizon-tailwind-react-ts-corporate/blob/main/src/assets/img/profile/image1.png?raw=true"
+                    alt=""
+                    />
+                </div>
+                <div class="ml-4">
+                    <p class="text-base font-medium text-navy-700 dark:text-white">
+                    Technology behind the Blockchain
+                    </p>
+                    <p class="mt-2 text-sm text-subtle">
+                    12th March 2022
+                    </p>
+                </div>
+                </div>
+                <div class="mr-4 gap-2 flex flex-col items-center justify-center text-gray-600 dark:text-white">
+                <button class="text-md font-buttons border-2 border-primary rounded-full px-8 py-2">Buy Ticket</button>
+                <button class="text-md font-buttons border-2 border-primary bg-primary rounded-full px-8 py-2">See Details</button>
+                </div>
+            </div>
+            <div class="flex w-full items-center justify-between rounded-2xl bg-transparent border-2 border-component p-3 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+                <div class="flex items-center">
+                <div class="">
+                    <img
+                    class="h-[83px] w-[83px] rounded-lg"
+                    src="https://github.com/horizon-ui/horizon-tailwind-react-ts-corporate/blob/main/src/assets/img/profile/image1.png?raw=true"
+                    alt=""
+                    />
+                </div>
+                <div class="ml-4">
+                    <p class="text-base font-medium text-navy-700 dark:text-white">
+                    Technology behind the Blockchain
+                    </p>
+                    <p class="mt-2 text-sm text-subtle">
+                    12th March 2022
+                    </p>
+                </div>
+                </div>
+                <div class="mr-4 gap-2 flex flex-col items-center justify-center text-gray-600 dark:text-white">
+                <button class="text-md font-buttons border-2 border-primary rounded-full px-8 py-2">Buy Ticket</button>
+                <button class="text-md font-buttons border-2 border-primary bg-primary rounded-full px-8 py-2">See Details</button>
+                </div>
+            </div>
+            <div class="flex w-full items-center justify-between rounded-2xl bg-transparent border-2 border-component p-3 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+                <div class="flex items-center">
+                <div class="">
+                    <img
+                    class="h-[83px] w-[83px] rounded-lg"
+                    src="https://github.com/horizon-ui/horizon-tailwind-react-ts-corporate/blob/main/src/assets/img/profile/image1.png?raw=true"
+                    alt=""
+                    />
+                </div>
+                <div class="ml-4">
+                    <p class="text-base font-medium text-navy-700 dark:text-white">
+                    Technology behind the Blockchain
+                    </p>
+                    <p class="mt-2 text-sm text-subtle">
+                    12th March 2022
+                    </p>
+                </div>
+                </div>
+                <div class="mr-4 gap-2 flex flex-col items-center justify-center text-gray-600 dark:text-white">
+                <button class="text-md font-buttons border-2 border-primary rounded-full px-8 py-2">Buy Ticket</button>
+                <button class="text-md font-buttons border-2 border-primary bg-primary rounded-full px-8 py-2">See Details</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endsection
