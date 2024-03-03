@@ -10,7 +10,7 @@
                         <ul class="list-unstyled">
                             <li>
                                 <a class="text-subtle hover:text-component font-semibold block pb-2 text-sm"
-                                    href="https://www.creative-tim.com/presentation?ref=njs-profile">Home</a>
+                                    href="/">Home</a>
                             </li>
                             <li>
                                 <a class="text-subtle hover:text-component font-semibold block pb-2 text-sm"
