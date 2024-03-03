@@ -5,7 +5,7 @@
                 <img src="{{ asset('Logo.png') }}" alt="Eventify Logo" class="w-40">
             </a>
             <div class="w-full lg:w-6/12 px-4">
-                <div class="flex flex-wrap items-top">
+                <div class="flex flex-wrap">
                     <div class="w-full lg:w-4/12 px-4 ml-auto">
                         <ul class="list-unstyled">
                             <li>

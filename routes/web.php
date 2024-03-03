@@ -20,4 +20,7 @@ Route::get('/', function () {
 Route::get('/events', function () {
     return view('events.index');
 });
+Route::get('/login', function () {
+    return view('Auth.login');
+});
 
