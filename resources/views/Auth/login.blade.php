@@ -5,7 +5,7 @@
 @section('content')
     <section class="h-screen relative">
         <img class="w-full h-screen relative" src="{{ asset('login.png') }}" alt="Cover">
-        <div id="authentication-modal"  aria-hidden="true" class="flex fixed z-50 justify-center items-center w-full md:inset-0 max-h-full">
+        <div id="authentication-modal"  aria-hidden="true" class="flex fixed justify-center items-center w-full md:inset-0 max-h-full">
             <div class=" p-4 w-full max-w-md max-h-full">
                 <!-- Modal content -->
                 <div class=" bg-component rounded-xl shadow ">

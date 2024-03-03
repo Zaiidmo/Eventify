@@ -2,7 +2,7 @@
 <header class="w-screen bg-transparent my-6 absolute">
     <nav class="container mx-auto w-full flex justify-between items-center px-6 text-gray-600 z-40 py-3 relative">
 
-        <a class="text-2xl flex items-center justify-between font-bold font-salsa text-white">
+        <a href="/" class="text-2xl flex items-center justify-between font-bold font-salsa text-white">
             <img src="{{ asset('Logo.png') }}" alt="Eventify Logo" class="w-40"> 
         </a>
 
