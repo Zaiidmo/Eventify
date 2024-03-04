@@ -83,10 +83,12 @@
         <div class="border-b border-primary bottom-2 flex justify-between items-center my-6">
             <h2 class="text-white font-supermercado  text-3xl tracking-wider">Upcoming Events</h2>>
             <div class="self-center justify-self-end mb-4">
-                <button id="login-btn"
-                    class=" py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block self-center">
-                    See More
-                </button>
+                <a href="/events">
+                    <button
+                        class=" py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block self-center">
+                        See More
+                    </button>
+                </a>
             </div>
         </div>
         <div class="flex flex-col gap-4">
@@ -95,8 +97,8 @@
                 <div class="">
                     <img
                     class="h-[83px] w-[83px] rounded-lg"
-                    src="https://github.com/horizon-ui/horizon-tailwind-react-ts-corporate/blob/main/src/assets/img/profile/image1.png?raw=true"
-                    alt=""
+                    src="{{ asset('events,png')}}"
+                    alt="Event Photo"
                     />
                 </div>
                 <div class="ml-4">
