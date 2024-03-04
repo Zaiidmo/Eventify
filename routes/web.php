@@ -17,10 +17,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::resource('events', 'EventController');
 Route::get('/events', function () {
-    return view('events.index');
+    return view('events.show');
 });
 Route::get('/login', function () {
     return view('Auth.login');
+});
+Route::get('/register', function () {
+    return view('Auth.register');
+});
+Route::get('/forgotPassword', function () {
+    return view('Auth.forgotPassword');
 });
 

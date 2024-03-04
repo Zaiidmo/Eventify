@@ -3,22 +3,20 @@
 @section('title', 'Eventify')
 
 @section('content')
-    <section class="top-0 mt-o h-full relative"
-        style="background-image: url(https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)">
-        <div class=" px-4 mx-auto max-w-screen-xl items-start justify-evenly flex flex-col h-screen">
-            <div class="justify-self-center">
-                <h1 class="text-9xl font-trade font-bold text-white text-center">Eventify</h1>
-                <p class="text-5xl font-bold font-yellowTTail text-white text-center">The best place to find events near you
-                </p>
-            </div>
-            <div class="self-center justify-self-end">
-                <button id="login-btn"
-                    class=" py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block self-center">
-                    Get Started Now
-                </button>
+    <section class="top-0 h-screen relative flex justify-center items-center">
+        <div class="h-1/2 lg:h-full w-full relative" style="background-image: url(https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+            <div class="px-4 mx-auto max-w-screen-xl items-start justify-evenly flex flex-col h-full">
+                <div class="justify-self-center">
+                    <h1 class="text-9xl font-trade font-bold text-white text-center">Eventify</h1>
+                    <p class="text-5xl font-bold font-yellowTTail text-white text-center">The best place to find events near you</p>
+                </div>
+                <div class="self-center justify-self-end">
+                    <a href="/register"><button id="login-btn" class="py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block self-center">Get Started Now</button></a>
+                </div>
             </div>
         </div>
     </section>
+    
     <section class="px-4 mx-auto max-w-screen-xl my-10 ">
         <div class="border-b border-primary bottom-2 flex justify-between items-center my-6">
             <h2 class="text-white font-supermercado text-3xl">Popular Reached Categories</h2>
