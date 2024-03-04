@@ -18,8 +18,11 @@ Route::get('/', function () {
 });
 
 // Route::resource('events', 'EventController');
-Route::get('/events', function () {
+Route::get('/eventsshow', function () {
     return view('events.show');
+});
+Route::get('/events', function () {
+    return view('events.index');
 });
 Route::get('/login', function () {
     return view('Auth.login');
