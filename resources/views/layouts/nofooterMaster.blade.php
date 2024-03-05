@@ -1,6 +1,6 @@
 @include('layouts.head')
 
-<body class="bg-black">
+<body class="bg-black h-screen">
     <!-- Navbar -->
     @include('layouts.header')
 

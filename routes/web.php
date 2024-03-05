@@ -34,3 +34,6 @@ Route::get('/forgotPassword', function () {
     return view('Auth.forgotPassword');
 });
 
+Route::get('/admin', function () {
+    return view('dashboard.index');
+});
