@@ -23,7 +23,7 @@ class ResetPasswordController extends Controller
     public function forgotPassword(Request $request)
     {
         $request->validate(['email' => 'required|email']);
-
+        dd($request);
         $status = $this->userRepository->forgotPassword($request->email);
 
         return $status 
