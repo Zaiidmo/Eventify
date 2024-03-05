@@ -70,7 +70,18 @@ class EventController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Event $event)
-    {
-        //
+{
+    // Check if the authenticated user is the organizer of the event
+    if (auth()->user()->id !== $event->user_id) {
+        // If not authorized, redirect back with an error message
+        return redirect()->back()->with('error', 'You are not authorized to delete this event.');
     }
+
+    // Delete the event
+    $event->delete();
+
+    // Redirect to a specific route or view with a success message
+    return redirect()->route('events.index')->with('success', 'Event deleted successfully');
+}
+
 }
