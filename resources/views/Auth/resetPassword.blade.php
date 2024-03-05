@@ -11,22 +11,23 @@
                 <div class=" bg-component rounded-xl shadow ">
                     <!-- Modal header -->
                          <h3 class="p-4 md:p-5 pb-1 md:pb-1 text-3xl font-semibold font-supermercado text-center text-gray-900 dark:text-white">
-                            Forgot Password ? 
+                            Reseting Password ... 
                         </h3>
-                        <p class="text-subtle font-yellowTTail text-xl text-center">Write down your email and we’ll send you link to reset your password </p>
+                        <p class="text-subtle font-yellowTTail text-xl text-center">Please Provide  your new Password</p>
                     <!-- Modal body -->
                     <div class="p-4 md:p-5">
                         <form action="{{ route('reset.password')}}" class="space-y-4" mathod="POST">
                             @csrf
                             <div>
-                                <label for="email" class="block mb-2 text-sm font-medium text-subtle ">Your email</label>
-                                <input type="email" name="email" id="email" class="bg-black border border-subtle text-subtle text-sm rounded-lg block w-full p-2.5" placeholder="name@company.com" required />
+                                <label for="password" class="block mb-2 text-sm font-medium text-subtle ">Your password</label>
+                                <input type="password" name="password" id="password" class="bg-black border border-subtle text-subtle text-sm rounded-lg block w-full p-2.5" placeholder="*********" />
+                            </div>
+                            <div>
+                                <label for="confirm_password" class="block mb-2 text-sm font-medium text-subtle "> Confirm Your Password</label>
+                                <input type="confirm_password" name="confirm_password" id="confirm_password" class="bg-black border border-subtle text-subtle text-sm rounded-lg block w-full p-2.5" placeholder="*********" required />
                             </div>
                             
-                            <button type="submit" class="w-full text-white bg-primary font-buttons focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-xl px-5 py-2.5 text-center">Login to your account</button>
-                            <div class="text-sm text-center font-medium font-poppins text-subtle">
-                                Remember Your Password? <a href="/login" class="text-secondary hover:underline ">Login  </a>
-                            </div>
+                            <button type="submit" class="w-full text-white bg-primary font-buttons focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-xl px-5 py-2.5 text-center">Reset Your Password</button>
                         </form>
                     </div>
                 </div>

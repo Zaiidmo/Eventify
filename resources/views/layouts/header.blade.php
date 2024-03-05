@@ -3,7 +3,7 @@
     <nav class="container mx-auto w-full flex justify-between items-center px-6 text-gray-600 z-40 py-3 relative">
 
         <a href="/" class="text-2xl flex items-center justify-between font-bold font-salsa text-white">
-            <img src="{{ asset('Logo.png') }}" alt="Eventify Logo" class="w-40"> 
+            <img src="{{ asset('Logo.png') }}" alt="Eventify Logo" class="w-40">
         </a>
 
         <div class="lg:hidden">
@@ -15,15 +15,12 @@
             </button>
         </div>
 
-                {{-- <a href="/login"> --}}
-                    <form action="{{ route('logout')}}" method="POST">
-                        @csrf
-                        <button type="submit" id="login-btn"
-                            class=" py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block ">
-                            Sign In
-                        </button>
-                    </form>
-                {{-- </a> --}}
+        <a href="/login">
+            <button id="login-btn"
+                class=" py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block ">
+                Sign In
+            </button>
+        </a>
     </nav>
 
 
