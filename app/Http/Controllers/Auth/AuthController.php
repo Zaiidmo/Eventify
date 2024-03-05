@@ -54,9 +54,10 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
 {
-    $credentials = $request->validated();
+    $request->validated();
+    $credentials = $request->only('email', 'password');
     $user = $this->userRepository->login($credentials);
-
+    // dd($user);
     if ($user) {
         // Authentication successful
         if ($user->role === 'spectator') {

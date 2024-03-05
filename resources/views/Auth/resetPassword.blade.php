@@ -19,6 +19,11 @@
                         <form action="{{ route('reset')}}" class="space-y-4" method="POST">
                             @csrf
                             @method('PUT')
+                            
+                            <div>
+                                <label for="email" class="block mb-2 text-sm font-medium text-subtle ">Your email</label>
+                                <input type="email" name="email" id="email" class="bg-black border border-subtle text-subtle text-sm rounded-lg block w-full p-2.5" placeholder="email@gmail.com" />
+                            </div>
                             <div>
                                 <label for="password" class="block mb-2 text-sm font-medium text-subtle ">Your password</label>
                                 <input type="password" name="password" id="password" class="bg-black border border-subtle text-subtle text-sm rounded-lg block w-full p-2.5" placeholder="*********" />
@@ -30,6 +35,7 @@
                             
                             <button type="submit" class="w-full text-white bg-primary font-buttons focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-xl px-5 py-2.5 text-center">Reset Your Password</button>
                         </form>
+                        
                     </div>
                 </div>
             </div>

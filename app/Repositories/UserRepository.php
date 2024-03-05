@@ -18,12 +18,16 @@ class UserRepository implements UserRepositoryInterface
     }
     public function login(array $credentials)
     {
+        // Attempt to authenticate the user
         if (Auth::attempt($credentials)) {
-            request()->session()->regenerate();
-            return true;
+            // Authentication successful
+            return Auth::user();
         }
-        return false;
+        
+        // Authentication failed
+        return null;
     }
+        
     public function logout()
     {
         Auth::logout();
@@ -40,7 +44,7 @@ class UserRepository implements UserRepositoryInterface
     public function resetPassword($email, $password)
     {
         $user = $this->findByEmail($email);
-        if($user){
+        if ($user) {
             $user->password = bcrypt($password);
             $user->save();
             return true;
