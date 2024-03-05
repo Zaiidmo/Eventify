@@ -16,7 +16,9 @@ class Event extends Model
         'poster',
         'available_tickets',
         'ticket_price',
-        'mode'
+        'mode',
+        'user_id',
+        'category_id',
     ];
     
     public function category() {

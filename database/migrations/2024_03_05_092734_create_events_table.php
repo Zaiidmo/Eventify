@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('available_tickets');
             $table->float('ticket_price');
             $table->enum('mode', ['auto', 'manual']);
-            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('category_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->softDeletes();
             $table->timestamps();

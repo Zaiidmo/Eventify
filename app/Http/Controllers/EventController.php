@@ -29,7 +29,17 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        $event = Event::create($validatedData);
+        $event->user()->associate(auth()->user());
+        // Attempt to save the event
+        if ($event->save()) {
+            // If event creation is successful, redirect with success message
+            return redirect()->route('events.index')->with('success', 'Event created successfully!');
+        } else {
+            // If event creation fails, return back with error message
+            return back()->withInput()->with('error', 'Failed to create event. Please try again.');
+        }
     }
 
     /**
