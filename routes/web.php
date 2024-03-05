@@ -40,7 +40,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/register', 'registerView');
     Route::post('/register', 'register')->name('register');
     Route::post('/login', 'login')->name('login');
-    Route::post('logout','logout')->name('logout');
+    Route::post('logout','logout')->name('logout')->middleware('auth')->except('loginView','registerView');
 });
 
 // Route::controller(ResetPasswordController::class)->group(function(){

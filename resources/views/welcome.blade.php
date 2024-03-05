@@ -10,9 +10,15 @@
             <div class=" flex flex-col items-start justify-center h-full text-left max-w-screen-xl mx-auto">
                     <h1 class="text-9xl font-trade font-bold text-white text-center">Eventify</h1>
                     <p class="text-5xl font-bold font-yellowTTail text-white text-center">The best place to find events near you</p>
+                    @auth
                     <div class="self-center justify-self-end">
-                        <a href="/register"><button id="login-btn" class="py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block self-center">Get Started Now</button></a>
+                        <a href="/events"><button id="login-btn" class="py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block self-center">Explore Events</button></a>
                     </div>
+                    @else
+                    <div class="self-center justify-self-end">
+                        <a href="{{ route('register')}}"><button id="login-btn" class="py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block self-center">Get Started Now</button></a>
+                    </div>
+                    @endauth
                 </div>
             </div>
         </div>

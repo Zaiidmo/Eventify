@@ -14,13 +14,16 @@
                 </svg>
             </button>
         </div>
-
+        @auth
+            
+        @else
         <a href="/login">
             <button id="login-btn"
                 class=" py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block ">
                 Sign In
             </button>
         </a>
+        @endauth
     </nav>
 
 

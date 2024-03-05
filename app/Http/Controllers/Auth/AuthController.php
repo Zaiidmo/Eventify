@@ -20,11 +20,19 @@ class AuthController extends Controller
 
     public function loginView()
     {
-        return view('Auth.login');
+        if(!Auth::check()){
+            return view('Auth.login');
+        }else{
+            return redirect('/');
+        }
     }
     public function registerView()
     {
-        return view('Auth.register');
+        if(!Auth::check()){
+            return view('Auth.register');
+        }else{
+            return redirect('/');
+        }
     }
     public function register(RegisterRequest $request)
     {
