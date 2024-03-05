@@ -1,5 +1,5 @@
 <aside
-    class="flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-black border-r rtl:border-r-0 rtl:border-l absolute">
+    class="flex flex-col w-72 h-fit px-4 py-8 overflow-y-auto bg-black absolute top-10 left-10 rounded-xl">
     <a href="/" class="mx-auto">
         <img class="w-auto h-6 sm:h-7" src="{{ asset('Logo.png') }}" alt="Eventify logo">
     </a>
