@@ -15,7 +15,13 @@
             </button>
         </div>
         @auth
-            
+            <form action="{{ route('logout')}}" method="POST">
+                @csrf
+                <button type="submit"
+                    class=" py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block ">
+                    Logout
+                </button>
+            </form>
         @else
         <a href="/login">
             <button id="login-btn"

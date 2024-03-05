@@ -27,8 +27,9 @@ class UserRepository implements UserRepositoryInterface
     public function logout()
     {
         Auth::logout();
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
+        // request()->session()->invalidate();
+        // request()->session()->regenerateToken();
+        return true;
     }
     public function forgotPassword($email)
     {

@@ -35,13 +35,18 @@ Route::get('/users', function () {
     return view('dashboard.users');
 });
 //Authenticating
-Route::controller(AuthController::class)->group(function () {
-    Route::get('/login', 'loginView');
-    Route::get('/register', 'registerView');
-    Route::post('/register', 'register')->name('register');
-    Route::post('/login', 'login')->name('login');
-    Route::post('logout','logout')->name('logout')->middleware('auth')->except('loginView','registerView');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
+
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/login', [AuthController::class, 'loginView'])->name('loginView');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/register', [AuthController::class, 'registerView'])->name('registerView');
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+});
+
 
 // Route::controller(ResetPasswordController::class)->group(function(){
 //     Route::get('reset-password/{token}', 'resetPasswordView')->name('reset.password.view');
