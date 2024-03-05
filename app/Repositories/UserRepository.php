@@ -11,9 +11,13 @@ class UserRepository implements UserRepositoryInterface
     {
         return User::create($data);
     }
-    public function login()
+    public function login(array $credentials)
     {
-
+        if (Auth::attempt($credentials)) {
+            request()->session()->regenerate();
+            return true;
+        }
+        return false;
     }
     public function logout()
     {

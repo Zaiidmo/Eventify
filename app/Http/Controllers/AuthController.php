@@ -6,6 +6,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use App\Repositories\UserRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -45,6 +46,13 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
+        $credentials = $request->validated();
+        $user = $this->userRepository->login($credentials);
+        if(Auth::user()->role === 'spectator'){
+            return redirect('/');
+        }else{
+            return redirect('/dashboard');
+        } 
     }
     public function logout()
     {

@@ -6,7 +6,7 @@ interface UserRepositoryInterface
 {
     public function create(array $data);
 
-    public function login();
+    public function login(array $data);
 
     public function logout();
 }
