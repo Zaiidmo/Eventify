@@ -1,118 +1,115 @@
-<aside id="sidebar" class="hidden fixed z-30 top-32 lg:w-72 shadow-md h-screen py-3 lg:flex bg-gray-800 opacity-75 rounded-2xl "
-    aria-label="Sidebar">
-    <ul class="space-y-2 w-full px-2 font-medium mt-16">
-        <li>
-            <a href="/"
-                class="flex items-center p-2 rounded-lg text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M12.7071 2.293C12.5196 2.10553 12.2652 2.00021 12.0001 2.00021C11.7349 2.00021 11.4806 2.10553 11.2931 2.293L4.29308 9.293L2.29308 11.293C2.19757 11.3852 2.12139 11.4956 2.06898 11.6176C2.01657 11.7396 1.98898 11.8708 1.98783 12.0036C1.98668 12.1364 2.01198 12.2681 2.06226 12.391C2.11254 12.5139 2.18679 12.6255 2.28069 12.7194C2.37458 12.8133 2.48623 12.8875 2.60913 12.9378C2.73202 12.9881 2.8637 13.0134 2.99648 13.0123C3.12926 13.0111 3.26048 12.9835 3.38249 12.9311C3.50449 12.8787 3.61483 12.8025 3.70708 12.707L4.00008 12.414V19C4.00008 19.7956 4.31615 20.5587 4.87876 21.1213C5.44137 21.6839 6.20443 22 7.00008 22H17.0001C17.7957 22 18.5588 21.6839 19.1214 21.1213C19.684 20.5587 20.0001 19.7956 20.0001 19V12.414L20.2931 12.707C20.4817 12.8892 20.7343 12.99 20.9965 12.9877C21.2587 12.9854 21.5095 12.8802 21.6949 12.6948C21.8803 12.5094 21.9855 12.2586 21.9878 11.9964C21.99 11.7342 21.8892 11.4816 21.7071 11.293L12.7071 2.293Z"
-                        fill="#ABB2BF" />
-                </svg>
+<aside
+    class="flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-black border-r rtl:border-r-0 rtl:border-l absolute">
+    <a href="/" class="mx-auto">
+        <img class="w-auto h-6 sm:h-7" src="{{ asset('Logo.png') }}" alt="Eventify logo">
+    </a>
 
-                <path
-                    d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
-                <path
-                    d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
-                </svg>
-                <span class="ms-3">Home</span>
-            </a>
-        </li>
-        <li>
-            <a href="profile"
-                class="flex items-center p-2 rounded-lg text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10C8 8.93913 8.42143 7.92172 9.17157 7.17157C9.92172 6.42143 10.9391 6 12 6C13.0609 6 14.0783 6.42143 14.8284 7.17157C15.5786 7.92172 16 8.93913 16 10Z"
-                        fill="#ABB2BF" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M11.592 21.992C6.2585 21.778 2 17.386 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22C11.9543 22.0003 11.9087 22.0003 11.863 22C11.7725 22 11.682 21.997 11.592 21.992ZM5.583 18.31C5.50823 18.0953 5.48278 17.8665 5.50854 17.6406C5.5343 17.4147 5.6106 17.1975 5.73179 17.0051C5.85298 16.8128 6.01593 16.6502 6.20856 16.5294C6.40119 16.4086 6.61855 16.3328 6.8445 16.3075C10.7425 15.876 13.2815 15.915 17.1605 16.3165C17.3868 16.3401 17.6046 16.4149 17.7976 16.5354C17.9905 16.6559 18.1534 16.8189 18.2739 17.0119C18.3943 17.2048 18.4691 17.4227 18.4927 17.649C18.5162 17.8753 18.4877 18.1039 18.4095 18.3175C20.072 16.6354 21.003 14.365 21 12C21 7.0295 16.9705 3 12 3C7.0295 3 3 7.0295 3 12C3 14.458 3.9855 16.686 5.583 18.31Z"
-                        fill="#ABB2BF" />
-                </svg>
-                <span class="flex-1 ms-3 whitespace-nowrap">Profile</span>
-                <!-- <span class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span> -->
-            </a>
-        </li>
-        <li>
-            <a href="dashboard"
-                class="flex items-center p-2 rounded-lg text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M2 5C2 4.46957 2.21071 3.96086 2.58579 3.58579C2.96086 3.21071 3.46957 3 4 3H10V21H4C3.46957 21 2.96086 20.7893 2.58579 20.4142C2.21071 20.0391 2 19.5304 2 19V5ZM14 3H20C20.5304 3 21.0391 3.21071 21.4142 3.58579C21.7893 3.96086 22 4.46957 22 5V10H14V3ZM14 14H22V19C22 19.5304 21.7893 20.0391 21.4142 20.4142C21.0391 20.7893 20.5304 21 20 21H14V14Z"
-                        stroke="#ABB2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+    <div class="flex flex-col items-center mt-6 -mx-2">
+        <img class="object-cover w-24 h-24 mx-2 rounded-full border-2 border-primary"
+            src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+            alt="avatar">
+        <h4 class="mx-2 mt-2 font-medium text-subtle dark:text-gray-200">John Doe</h4>
+        <p class="mx-2 mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">john@example.com</p>
+    </div>
 
-                <span class="flex-1 ms-3 whitespace-nowrap">Dashboard</span>
-                <!-- <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span> -->
-            </a>
-        </li>
-        <li>
-            <a href="roles"
-                class="flex items-center p-2 rounded-lg text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32"><path fill="currentColor" d="M19.307 3.21a2.91 2.91 0 1 0-.223 1.94a11.636 11.636 0 0 1 8.232 7.049l1.775-.698a13.576 13.576 0 0 0-9.784-8.291m-2.822 1.638a.97.97 0 1 1 0-1.939a.97.97 0 0 1 0 1.94m-4.267.805l-.717-1.774a13.576 13.576 0 0 0-8.291 9.784a2.91 2.91 0 1 0 1.94.223a11.636 11.636 0 0 1 7.068-8.233m-8.34 11.802a.97.97 0 1 1 0-1.94a.97.97 0 0 1 0 1.94m12.607 8.727a2.91 2.91 0 0 0-2.599 1.62a11.636 11.636 0 0 1-8.233-7.05l-1.774.717a13.576 13.576 0 0 0 9.813 8.291a2.91 2.91 0 1 0 2.793-3.578m0 3.879a.97.97 0 1 1 0-1.94a.97.97 0 0 1 0 1.94M32 16.485a2.91 2.91 0 1 0-4.199 2.599a11.636 11.636 0 0 1-7.05 8.232l.718 1.775a13.576 13.576 0 0 0 8.291-9.813A2.91 2.91 0 0 0 32 16.485m-2.91.97a.97.97 0 1 1 0-1.94a.97.97 0 0 1 0 1.94"/><path fill="currentColor" d="M19.19 16.35a3.879 3.879 0 1 0-5.42 0a4.848 4.848 0 0 0-2.134 4.014v1.939h9.697v-1.94a4.848 4.848 0 0 0-2.143-4.014m-4.645-2.774a1.94 1.94 0 1 1 3.88 0a1.94 1.94 0 0 1-3.88 0m-.97 6.788a2.91 2.91 0 1 1 5.819 0z" class="ouiIcon__fillSecondary"/></svg>
+    <div class="flex flex-col justify-between flex-1 mt-6">
+        <nav class="space-y-6">
+            <div>
+                <label class="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">Admin</label>
 
-                <span class="flex-1 ms-3 whitespace-nowrap">Roles</span>
-                <!-- <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span> -->
-            </a>
-        </li>
-        <li>
-            <a href="permissions"
-                class="flex items-center p-2 rounded-lg text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 2048 2048"><path fill="currentColor" d="M2048 1573v475h-512v-256h-256v-256h-256v-207q-74 39-155 59t-165 20q-97 0-187-25t-168-71t-142-110t-111-143t-71-168T0 704q0-97 25-187t71-168t110-142T349 96t168-71T704 0q97 0 187 25t168 71t142 110t111 143t71 168t25 187q0 51-8 101t-23 98zM512 704q40 0 75-15t61-41t41-61t15-75q0-40-15-75t-41-61t-61-41t-75-15q-40 0-75 15t-61 41t-41 61t-15 75q0 40 15 75t41 61t61 41t75 15"/></svg>
-                <span class="flex-1 ms-3 whitespace-nowrap">Permissions</span>
-                <!-- <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span> -->
-            </a>
-        </li>
-        <li>
-            <a href="users"
-                class="flex items-center p-2 rounded-lg text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M12 4.354C12.5374 3.7447 13.2477 3.31351 14.0362 3.11779C14.8247 2.92208 15.6542 2.97112 16.4142 3.2584C17.1741 3.54568 17.8286 4.05757 18.2905 4.72596C18.7524 5.39435 18.9998 6.18754 18.9998 7C18.9998 7.81246 18.7524 8.60565 18.2905 9.27404C17.8286 9.94243 17.1741 10.4543 16.4142 10.7416C15.6542 11.0289 14.8247 11.0779 14.0362 10.8822C13.2477 10.6865 12.5374 10.2553 12 9.646M15 21H3V20C3 18.4087 3.63214 16.8826 4.75736 15.7574C5.88258 14.6321 7.4087 14 9 14C10.5913 14 12.1174 14.6321 13.2426 15.7574C14.3679 16.8826 15 18.4087 15 20V21ZM15 21H21V20C21.0001 18.9467 20.723 17.9119 20.1965 16.9997C19.6699 16.0875 18.9125 15.3299 18.0004 14.8032C17.0882 14.2765 16.0535 13.9992 15.0002 13.9992C13.9469 13.9991 12.9122 14.2764 12 14.803M13 7C13 8.06087 12.5786 9.07828 11.8284 9.82843C11.0783 10.5786 10.0609 11 9 11C7.93913 11 6.92172 10.5786 6.17157 9.82843C5.42143 9.07828 5 8.06087 5 7C5 5.93913 5.42143 4.92172 6.17157 4.17157C6.92172 3.42143 7.93913 3 9 3C10.0609 3 11.0783 3.42143 11.8284 4.17157C12.5786 4.92172 13 5.93913 13 7Z"
-                        stroke="#ABB2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-
-                <span class="flex-1 ms-3 whitespace-nowrap">Users Management</span>
-            </a>
-        </li>
-        <li>
-            <a href="categories"
-                class="flex items-center p-2 rounded-lg text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M5.07 4.5L5.4075 5.1675L5.82 6H9V9.75H3V4.5H5.07ZM5.535 3H2.25C2.05109 3 1.86032 3.07902 1.71967 3.21967C1.57902 3.36032 1.5 3.55109 1.5 3.75V10.5C1.5 10.6989 1.57902 10.8897 1.71967 11.0303C1.86032 11.171 2.05109 11.25 2.25 11.25H9.75C9.94891 11.25 10.1397 11.171 10.2803 11.0303C10.421 10.8897 10.5 10.6989 10.5 10.5V5.25C10.5 5.05109 10.421 4.86032 10.2803 4.71967C10.1397 4.57902 9.94891 4.5 9.75 4.5H6.75L6.21 3.4125C6.1471 3.28767 6.05058 3.18291 5.93131 3.11002C5.81204 3.03713 5.67477 2.99903 5.535 3ZM17.07 4.5L17.4075 5.1675L17.82 6H21V9.75H15V4.5H17.07ZM17.535 3H14.25C14.0511 3 13.8603 3.07902 13.7197 3.21967C13.579 3.36032 13.5 3.55109 13.5 3.75V10.5C13.5 10.6989 13.579 10.8897 13.7197 11.0303C13.8603 11.171 14.0511 11.25 14.25 11.25H21.75C21.9489 11.25 22.1397 11.171 22.2803 11.0303C22.421 10.8897 22.5 10.6989 22.5 10.5V5.25C22.5 5.05109 22.421 4.86032 22.2803 4.71967C22.1397 4.57902 21.9489 4.5 21.75 4.5H18.75L18.21 3.4125C18.1471 3.28767 18.0506 3.18291 17.9313 3.11002C17.812 3.03713 17.6748 2.99903 17.535 3ZM5.07 14.25L5.4075 14.9175L5.82 15.75H9V19.5H3V14.25H5.07ZM5.535 12.75H2.25C2.05109 12.75 1.86032 12.829 1.71967 12.9697C1.57902 13.1103 1.5 13.3011 1.5 13.5V20.25C1.5 20.4489 1.57902 20.6397 1.71967 20.7803C1.86032 20.921 2.05109 21 2.25 21H9.75C9.94891 21 10.1397 20.921 10.2803 20.7803C10.421 20.6397 10.5 20.4489 10.5 20.25V15C10.5 14.8011 10.421 14.6103 10.2803 14.4697C10.1397 14.329 9.94891 14.25 9.75 14.25H6.75L6.21 13.1625C6.1471 13.0377 6.05058 12.9329 5.93131 12.86C5.81204 12.7871 5.67477 12.749 5.535 12.75ZM17.07 14.25L17.4075 14.9175L17.82 15.75H21V19.5H15V14.25H17.07ZM17.535 12.75H14.25C14.0511 12.75 13.8603 12.829 13.7197 12.9697C13.579 13.1103 13.5 13.3011 13.5 13.5V20.25C13.5 20.4489 13.579 20.6397 13.7197 20.7803C13.8603 20.921 14.0511 21 14.25 21H21.75C21.9489 21 22.1397 20.921 22.2803 20.7803C22.421 20.6397 22.5 20.4489 22.5 20.25V15C22.5 14.8011 22.421 14.6103 22.2803 14.4697C22.1397 14.329 21.9489 14.25 21.75 14.25H18.75L18.21 13.1625C18.1471 13.0377 18.0506 12.9329 17.9313 12.86C17.812 12.7871 17.6748 12.749 17.535 12.75Z"
-                        fill="#ABB2BF" />
-                </svg>
-
-                <span class="flex-1 ms-3  whitespace-nowrap">Categories</span>
-                <!-- <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span> -->
-            </a>
-        </li>
-        <li>
-            <a href="events"
-                class="flex items-center p-2 rounded-lg text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_21_396)">
+                <a class="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-lg dark:bg-primary dark:text-gray-200"
+                    href="#">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
-                            d="M20.385 3.53691L20.975 4.12691C21.788 4.94091 21.665 6.38391 20.698 7.34991L8.531 19.5169L4.589 20.9589C4.094 21.1409 3.612 20.9049 3.514 20.4339C3.48088 20.2631 3.49647 20.0863 3.559 19.9239L5.029 15.9479L17.162 3.81391C18.129 2.84791 19.572 2.72291 20.385 3.53691ZM8 4.74691C8.13132 4.74691 8.26136 4.77278 8.38268 4.82303C8.50401 4.87329 8.61425 4.94694 8.70711 5.0398C8.79996 5.13266 8.87362 5.2429 8.92388 5.36423C8.97413 5.48555 9 5.61559 9 5.74691C9 5.87823 8.97413 6.00827 8.92388 6.12959C8.87362 6.25092 8.79996 6.36116 8.70711 6.45402C8.61425 6.54688 8.50401 6.62053 8.38268 6.67079C8.26136 6.72104 8.13132 6.74691 8 6.74691H4C3.46957 6.74691 2.96086 6.95762 2.58579 7.3327C2.21071 7.70777 2 8.21648 2 8.74691V20.7469C2 21.2773 2.21071 21.7861 2.58579 22.1611C2.96086 22.5362 3.46957 22.7469 4 22.7469H16C16.5304 22.7469 17.0391 22.5362 17.4142 22.1611C17.7893 21.7861 18 21.2773 18 20.7469V16.7469C18 16.4817 18.1054 16.2273 18.2929 16.0398C18.4804 15.8523 18.7348 15.7469 19 15.7469C19.2652 15.7469 19.5196 15.8523 19.7071 16.0398C19.8946 16.2273 20 16.4817 20 16.7469V20.7469C20 21.8078 19.5786 22.8252 18.8284 23.5753C18.0783 24.3255 17.0609 24.7469 16 24.7469H4C2.93913 24.7469 1.92172 24.3255 1.17157 23.5753C0.421427 22.8252 0 21.8078 0 20.7469V8.74691C0 7.68604 0.421427 6.66863 1.17157 5.91848C1.92172 5.16834 2.93913 4.74691 4 4.74691H8Z"
-                            fill="#ABB2BF" />
-                    </g>
-                    <defs>
-                        <clipPath id="clip0_21_396">
-                            <rect width="24" height="24" fill="white" />
-                        </clipPath>
-                    </defs>
-                </svg>
+                            d="M19 11H5M19 11C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11M19 11V9C19 7.89543 18.1046 7 17 7M5 11V9C5 7.89543 5.89543 7 7 7M7 7V5C7 3.89543 7.89543 3 9 3H15C16.1046 3 17 3.89543 17 5V7M7 7H17"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
 
-                <span class="flex-1 ms-3  whitespace-nowrap">Events</span>
-                <!-- <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span> -->
-            </a>
-        </li>
-    </ul>
+                    <span class="mx-4 font-medium">Dashboard</span>
+                </a>
 
+                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-primary dark:hover:text-gray-200 hover:text-gray-700"
+                    href="users">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 640 512">
+                        <path fill="currentColor"
+                            d="M144 160a80 80 0 1 0 0-160a80 80 0 1 0 0 160m368 0a80 80 0 1 0 0-160a80 80 0 1 0 0 160M0 298.7C0 310.4 9.6 320 21.3 320h214.1c-26.6-23.5-43.3-57.8-43.3-96c0-7.6.7-15 1.9-22.3c-13.6-6.3-28.7-9.7-44.6-9.7h-42.7C47.8 192 0 239.8 0 298.7M320 320c24 0 45.9-8.8 62.7-23.3c2.5-3.7 5.2-7.3 8-10.7c2.7-3.3 5.7-6.1 9-8.3C410 262.3 416 243.9 416 224c0-53-43-96-96-96s-96 43-96 96s43 96 96 96m65.4 60.2c-10.3-5.9-18.1-16.2-20.8-28.2H261.3C187.7 352 128 411.7 128 485.3c0 14.7 11.9 26.7 26.7 26.7h300.5c-2.1-5.2-3.2-10.9-3.2-16.4v-3c-1.3-.7-2.7-1.5-4-2.3l-2.6 1.5c-16.8 9.7-40.5 8-54.7-9.7c-4.5-5.6-8.6-11.5-12.4-17.6l-.1-.2l-.1-.2l-2.4-4.1l-.1-.2l-.1-.2c-3.4-6.2-6.4-12.6-9-19.3c-8.2-21.2 2.2-42.6 19-52.3l2.7-1.5v-4.6l-2.7-1.5zM533.3 192h-42.6c-15.9 0-31 3.5-44.6 9.7c1.3 7.2 1.9 14.7 1.9 22.3c0 17.4-3.5 33.9-9.7 49c2.5.9 4.9 2 7.1 3.3l2.6 1.5c1.3-.8 2.6-1.6 4-2.3v-3c0-19.4 13.3-39.1 35.8-42.6c7.9-1.2 16-1.9 24.2-1.9s16.3.6 24.2 1.9c22.5 3.5 35.8 23.2 35.8 42.6v3c1.3.7 2.7 1.5 4 2.3l2.6-1.5c16.8-9.7 40.5-8 54.7 9.7c2.3 2.8 4.5 5.8 6.6 8.7c-2.1-57.1-49-102.7-106.6-102.7m91.3 163.9c6.3-3.6 9.5-11.1 6.8-18c-2.1-5.5-4.6-10.8-7.4-15.9l-2.3-4c-3.1-5.1-6.5-9.9-10.2-14.5c-4.6-5.7-12.7-6.7-19-3l-2.9 1.7c-9.2 5.3-20.4 4-29.6-1.3s-16.1-14.5-16.1-25.1v-3.4c0-7.3-4.9-13.8-12.1-14.9c-6.5-1-13.1-1.5-19.9-1.5s-13.4.5-19.9 1.5c-7.2 1.1-12.1 7.6-12.1 14.9v3.4c0 10.6-6.9 19.8-16.1 25.1s-20.4 6.6-29.6 1.3l-2.9-1.7c-6.3-3.6-14.4-2.6-19 3c-3.7 4.6-7.1 9.5-10.2 14.6l-2.3 3.9c-2.8 5.1-5.3 10.4-7.4 15.9c-2.6 6.8.5 14.3 6.8 17.9l2.9 1.7c9.2 5.3 13.7 15.8 13.7 26.4s-4.5 21.1-13.7 26.4l-3 1.7c-6.3 3.6-9.5 11.1-6.8 17.9c2.1 5.5 4.6 10.7 7.4 15.8l2.4 4.1c3 5.1 6.4 9.9 10.1 14.5c4.6 5.7 12.7 6.7 19 3l2.9-1.7c9.2-5.3 20.4-4 29.6 1.3s16.1 14.5 16.1 25.1v3.4c0 7.3 4.9 13.8 12.1 14.9c6.5 1 13.1 1.5 19.9 1.5s13.4-.5 19.9-1.5c7.2-1.1 12.1-7.6 12.1-14.9V492c0-10.6 6.9-19.8 16.1-25.1s20.4-6.6 29.6-1.3l2.9 1.7c6.3 3.6 14.4 2.6 19-3c3.7-4.6 7.1-9.4 10.1-14.5l2.4-4.2c2.8-5.1 5.3-10.3 7.4-15.8c2.6-6.8-.5-14.3-6.8-17.9l-3-1.7c-9.2-5.3-13.7-15.8-13.7-26.4s4.5-21.1 13.7-26.4l3-1.7zM472 384a40 40 0 1 1 80 0a40 40 0 1 1-80 0" />
+                    </svg>
+
+                    <span class="mx-4 font-medium">Users </span>
+                </a>
+
+                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-primary dark:hover:text-gray-200 hover:text-gray-700"
+                    href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32">
+                        <path fill="currentColor"
+                            d="M28 6a2 2 0 0 0-2-2h-4V2h-2v2h-8V2h-2v2H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h4v-2H6V6h4v2h2V6h8v2h2V6h4v6h2Z" />
+                        <path fill="currentColor"
+                            d="m21 15l2.549 4.938l5.451.791l-4 3.844L26 30l-5-2.562L16 30l1-5.427l-4-3.844l5.6-.791z" />
+                    </svg>
+
+                    <span class="mx-4 font-medium">Events</span>
+                </a>
+
+                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-primary dark:hover:text-gray-200 hover:text-gray-700"
+                    href="#">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M15 5V7M15 11V13M15 17V19M5 5C3.89543 5 3 5.89543 3 7V10C4.10457 10 5 10.8954 5 12C5 13.1046 4.10457 14 3 14V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V14C19.8954 14 19 13.1046 19 12C19 10.8954 19.8954 10 21 10V7C21 5.89543 20.1046 5 19 5H5Z"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                    <span class="mx-4 font-medium">Tickets</span>
+                </a>
+
+                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-primary dark:hover:text-gray-200 hover:text-gray-700"
+                    href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32">
+                        <path fill="currentColor"
+                            d="M14 25h14v2H14zm-6.83 1l-2.58 2.58L6 30l4-4l-4-4l-1.42 1.41zM14 15h14v2H14zm-6.83 1l-2.58 2.58L6 20l4-4l-4-4l-1.42 1.41zM14 5h14v2H14zM7.17 6L4.59 8.58L6 10l4-4l-4-4l-1.42 1.41z" />
+                    </svg>
+                    <span class="mx-4 font-medium">Categories</span>
+                </a>
+                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-primary dark:hover:text-gray-200 hover:text-gray-700"
+                    href="#">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10.3246 4.31731C10.751 2.5609 13.249 2.5609 13.6754 4.31731C13.9508 5.45193 15.2507 5.99038 16.2478 5.38285C17.7913 4.44239 19.5576 6.2087 18.6172 7.75218C18.0096 8.74925 18.5481 10.0492 19.6827 10.3246C21.4391 10.751 21.4391 13.249 19.6827 13.6754C18.5481 13.9508 18.0096 15.2507 18.6172 16.2478C19.5576 17.7913 17.7913 19.5576 16.2478 18.6172C15.2507 18.0096 13.9508 18.5481 13.6754 19.6827C13.249 21.4391 10.751 21.4391 10.3246 19.6827C10.0492 18.5481 8.74926 18.0096 7.75219 18.6172C6.2087 19.5576 4.44239 17.7913 5.38285 16.2478C5.99038 15.2507 5.45193 13.9508 4.31731 13.6754C2.5609 13.249 2.5609 10.751 4.31731 10.3246C5.45193 10.0492 5.99037 8.74926 5.38285 7.75218C4.44239 6.2087 6.2087 4.44239 7.75219 5.38285C8.74926 5.99037 10.0492 5.45193 10.3246 4.31731Z"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                    <span class="mx-4 font-medium">Settings</span>
+                </a>
+            </div>
+            <div>
+                <label class="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">Users Navigation</label>
+
+
+                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-primary dark:hover:text-gray-200 hover:text-gray-700"
+                    href="#">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                    <span class="mx-4 font-medium">Accounts</span>
+                </a>
+                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-primary dark:hover:text-gray-200 hover:text-gray-700"
+                    href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 26 26">
+                        <path fill="currentColor"
+                            d="M12.906-.031a1 1 0 0 0-.125.031A1 1 0 0 0 12 1v1H3a3 3 0 0 0-3 3v13c0 1.656 1.344 3 3 3h9v.375l-5.438 2.719a1.006 1.006 0 0 0 .875 1.812L12 23.625V24a1 1 0 1 0 2 0v-.375l4.563 2.281a1.006 1.006 0 0 0 .875-1.812L14 21.375V21h9c1.656 0 3-1.344 3-3V5a3 3 0 0 0-3-3h-9V1a1 1 0 0 0-1.094-1.031M2 5h22v13H2zm18.875 1a1 1 0 0 0-.594.281L17 9.563L14.719 7.28a1 1 0 0 0-1.594.219l-2.969 5.188l-1.219-3.063a1 1 0 0 0-1.656-.344l-3 3a1.016 1.016 0 1 0 1.439 1.44l1.906-1.906l1.438 3.562a1 1 0 0 0 1.812.125l3.344-5.844l2.062 2.063a1 1 0 0 0 1.438 0l4-4A1 1 0 0 0 20.875 6" />
+                    </svg>
+
+                    <span class="mx-4 font-medium">My Statistics</span>
+                </a>
+
+
+            </div>
+        </nav>
 </aside>
