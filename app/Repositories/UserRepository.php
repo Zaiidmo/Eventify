@@ -11,12 +11,8 @@ class UserRepository implements UserRepositoryInterface
     public function register(array $data)
     {
         return User::create($data);
-        // return $this->create($data);
     }
 
-    public function create(array $data)
-    {
-    }
     public function login(array $credentials)
     {
         if (Auth::attempt($credentials)) {

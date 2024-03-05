@@ -21,4 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('event', 'App\Http\Controllers\EventController');
 
-Route::POST('register', [AuthController::class , 'postRegister']);
+Route::post('register', [AuthController::class, 'register']);
+// Route::controller(AuthController::class)->group(function(){
+//     Route::get('login', 'AuthController@loginView');
+//     Route::get('register', 'AuthController@registerView');
+//     Route::post('login', 'AuthController@login');
+//     Route::get('logout', 'AuthController@logout');
+// });

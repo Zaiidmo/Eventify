@@ -19,38 +19,27 @@ class AuthController extends Controller
         $this->userRepository = $userRepository;
     }
 
-    public function login()
+    public function loginView()
     {
         return view('auth.login');
     }
-    public function register()
+    public function registerView()
     {
         return view('auth.register');
     }
-    public function postregister(RegisterRequest $request)
+    public function register(RegisterRequest $request)
     {
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
         $user = $this->userRepository->register($data);
-        return response()->json($user, 201);
-        // if ($user) {
-        //     auth()->login($user); 
-        //     return redirect('/');
-            // if ($user->isAdmin()) {
-            //     return redirect()->route('admin.dashboard');
-            // } elseif ($user->isOrganizer()) {
-            //     return redirect()->route('organizer.form', $user->id);
-            // } elseif ($user->isSpectator()) {
-            //     return redirect('/');
-            // }
-    
-        // } else {
-        //     return back()->with('error', 'Registration failed.');
-        // }
-        
+        if ($user) {
+            return redirect('login');
+        } else {
+            return back()->with('error', 'Something went wrong');
+        }
     }
 
-    public function postLogin(LoginRequest $request)
+    public function login(LoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
         if ($this->userRepository->login($credentials)) {

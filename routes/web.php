@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController ;
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +20,11 @@ Route::get('/', function () {
 });
 
 Route::resource('events', EventController::class);
+
+Route::controller(AuthController::class)->group(function(){
+    Route::post('register', 'AuthController@register');
+    Route::get('login', 'AuthController@loginView');
+    Route::get('register', 'AuthController@registerView');
+    Route::post('login', 'AuthController@login');
+    Route::get('logout', 'AuthController@logout');
+});
