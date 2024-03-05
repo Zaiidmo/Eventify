@@ -26,19 +26,17 @@ Route::get('/eventsshow', function () {
 Route::get('/events', function () {
     return view('events.index');
 });
-Route::get('/login', function () {
-    return view('Auth.login');
-});
-Route::get('/register', function () {
-    return view('Auth.register');
-});
-Route::get('/forgotPassword', function () {
-    return view('Auth.forgotPassword');
-});
 
 Route::get('/admin', function () {
     return view('dashboard.index');
 });
 Route::get('/users', function () {
     return view('dashboard.users');
+});
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/login', 'loginView');
+    Route::get('/register', 'registerView');
+    Route::post('/register', 'register')->name('register');
+    Route::post('/login', 'login')->name('login');
+    Route::post('/logout','logout')->name('logout');
 });

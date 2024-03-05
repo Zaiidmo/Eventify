@@ -6,8 +6,6 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use App\Repositories\UserRepositoryInterface;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -21,31 +19,37 @@ class AuthController extends Controller
 
     public function loginView()
     {
-        return view('auth.login');
+        return view('Auth.login');
     }
     public function registerView()
     {
-        return view('auth.register');
+        return view('Auth.register');
     }
     public function register(RegisterRequest $request)
     {
         $data = $request->validated();
-        $data['password'] = Hash::make($data['password']);
-        $user = $this->userRepository->register($data);
-        if ($user) {
-            return redirect('login');
-        } else {
+        $data['password'] = Hash::make($request->password);
+        // dd($data);
+
+        $user = $this->userRepository->create($data);
+
+        if (!$user) {
             return back()->with('error', 'Something went wrong');
         }
+
+        auth()->attempt($request->only('email', 'password'));
+
+        return redirect('/')->with('success', 'You have been registered successfully');
+
     }
 
     public function login(LoginRequest $request)
     {
-        $credentials = $request->only('email', 'password');
-        if ($this->userRepository->login($credentials)) {
-            return redirect('/');
-        } else {
-            return back()->with('error', 'Something went wrong');
-        }
+    }
+    public function logout()
+    {
+        $this->userRepository->logout();
+
+        return redirect('/');
     }
 }
