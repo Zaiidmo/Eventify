@@ -16,7 +16,7 @@
                         <p class="text-subtle font-yellowTTail text-xl text-center">Write down your email and we’ll send you link to reset your password </p>
                     <!-- Modal body -->
                     <div class="p-4 md:p-5">
-                        <form action="{{ route('forgot.password')}}" class="space-y-4" mathod="POST">
+                        <form action="{{ route('forgot')}}" class="space-y-4" method="POST">
                             @csrf
                             @method('POST')
                             <div>

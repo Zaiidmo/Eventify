@@ -53,15 +53,23 @@ class AuthController extends Controller
     }
 
     public function login(LoginRequest $request)
-    {
-        $credentials = $request->validated();
-        $user = $this->userRepository->login($credentials);
-        if(Auth::user()->role === 'spectator'){
+{
+    $credentials = $request->validated();
+    $user = $this->userRepository->login($credentials);
+
+    if ($user) {
+        // Authentication successful
+        if ($user->role === 'spectator') {
             return redirect('/');
-        }else{
+        } else {
             return redirect('/dashboard');
-        } 
+        }
+    } else {
+        // Authentication failed
+        return back()->withInput()->withErrors(['email' => 'Invalid email or password']);
     }
+}
+
     public function logout()
     {
         $this->userRepository->logout();

@@ -47,13 +47,9 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/register', [AuthController::class, 'register'])->name('register');
 });
 
-
-// Route::controller(ResetPasswordController::class)->group(function(){
-//     Route::get('reset-password/{token}', 'resetPasswordView')->name('reset.password.view');
-//     Route::get('forget-password', 'forgetPasswordView')->name('forget.password.view');
-//     Route::post('forgot-password', 'forgotPassword')->name('forgot.password');
-//     Route::post('reset-password', 'resetPassword')->name('reset.password');
-// });
-
-
-Route::post('forgot-password', [ResetPasswordController::class, 'forgotPassword'])->name('forgot.password');
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/forgot-password', [ResetPasswordController::class, 'forgetPasswordView'])->name('forgot.view');
+    Route::post('/forgot', [ResetPasswordController::class, 'forgotPassword'])->name('forgot');
+    Route::get('/reset-password', [ResetPasswordController::class, 'resetPasswordView'])->name('password.reset');
+    Route::put('/reset', [ResetPasswordController::class, 'resetPassword'])->name('reset');
+});
