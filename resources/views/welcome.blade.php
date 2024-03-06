@@ -12,18 +12,20 @@
                     <p class="text-5xl font-bold font-yellowTTail text-white text-center">The best place to find events near
                         you</p>
                     @auth
-                        @if (Auth::user()->role == 'spectator')
-                        <div class="self-center justify-self-end">
-                            <a href="{{ route('events.index')}}"><button id="login-btn"
-                                    class="py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block self-center">Explore
-                                    Events</button></a>
-                        </div>
-                        @else
-                        <div class="self-center justify-self-end">
-                            <a href="{{ route('events.create')}}"><button id="login-btn"
-                                    class="py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block self-center">Create and Event</button></a>
-                        </div>
-                        @endif
+                        @role('organizer')
+                            <div class="self-center justify-self-end">
+                                <a href="{{ route('events.index') }}"><button id="login-btn"
+                                        class="py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block self-center">Explore
+                                        Events</button></a>
+                            </div>
+                        @endrole
+                        @role('manager')
+                            <div class="self-center justify-self-end">
+                                <a href="{{ route('events.create') }}"><button id="login-btn"
+                                        class="py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block self-center">Create
+                                        and Event</button></a>
+                            </div>
+                        @endrole
                     @else
                         <div class="self-center justify-self-end">
                             <a href="{{ route('register') }}"><button id="login-btn"

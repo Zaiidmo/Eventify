@@ -60,11 +60,7 @@ class AuthController extends Controller
     // dd($user);
     if ($user) {
         // Authentication successful
-        if ($user->role === 'spectator') {
-            return redirect('/');
-        } else {
-            return redirect('/dashboard');
-        }
+        return redirect('/');
     } else {
         // Authentication failed
         return back()->withInput()->withErrors(['email' => 'Invalid email or password']);
