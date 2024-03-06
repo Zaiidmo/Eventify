@@ -24,6 +24,7 @@ class AdminController extends Controller
     {
         return view('dashboard.users', [
             'authUser' =>auth()->user(),
+            'countUsers' =>User::count(),
             'users' => User::all()
         ]);
     }
@@ -31,6 +32,7 @@ class AdminController extends Controller
     {
         return view('dashboard.events', [
             'authUser' =>auth()->user(),
+            'countEvents' =>Event::count(),
             'events' => Event::all()
         ]);  
     }

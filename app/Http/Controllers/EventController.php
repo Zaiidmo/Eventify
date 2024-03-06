@@ -8,8 +8,9 @@ use App\Models\Event;
 
 class EventController extends Controller
 {
-    public function __construct(){
-        $this->middleware('role:organizer,manager',['except' => ['index','show']]); // Only organizer can create, update and delete
+    public function __construct()
+    {
+        // $this->middleware('role:organizer,manager')->except(['index', 'show',]);
     }
 
     /**
@@ -75,17 +76,19 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
 {
-    // Check if the authenticated user is the organizer of the event
-    if (auth()->user()->id !== $event->user_id) {
-        // If not authorized, redirect back with an error message
-        return redirect()->back()->with('error', 'You are not authorized to delete this event.');
+    // Check if the authenticated user is a manager or the organizer of the event
+    if (auth()->user()->hasRole('manager') || auth()->user()->id === $event->user_id) {
+        // Delete the event
+        $event->delete();
+
+        // Redirect to a specific route or view with a success message
+        return redirect()->route('events.index')->with('success', 'Event deleted successfully');
     }
 
-    // Delete the event
-    $event->delete();
-
-    // Redirect to a specific route or view with a success message
-    return redirect()->route('events.index')->with('success', 'Event deleted successfully');
+    // If not authorized, redirect back with an error message
+    return redirect()->back()->with('error', 'You are not authorized to delete this event.');
 }
+
+
 
 }

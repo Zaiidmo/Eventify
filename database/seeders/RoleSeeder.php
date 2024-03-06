@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class RoleSeeder extends Seeder
@@ -15,45 +14,48 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $permission = new Permission();
-        $permission->name = 'create-event';
-        $permission->save();
+        // Create and attach permissions for events
+        $createEventPermission = Permission::create(['name' => 'create-event']);
+        $updateEventPermission = Permission::create(['name' => 'update-event']);
+        $deleteEventPermission = Permission::create(['name' => 'delete-event']);
 
-        $role = new Role();
-        $role->name = 'organizer';
-        $role->save();
-        $role->permissions()->attach($permission);
-        $permission->roles()->attach($role);
+        // Create and attach permissions for categories
+        $createCategoryPermission = Permission::create(['name' => 'create-category']);
+        $updateCategoryPermission = Permission::create(['name' => 'update-category']);
+        $deleteCategoryPermission = Permission::create(['name' => 'delete-category']);
 
-        $permission = new Permission();
-        $permission->name = 'create-category';
-        $permission->save();
+        // Create and attach roles with permissions
+        $organizer = Role::create(['name' => 'organizer']);
+        $organizer->permissions()->attach([$createEventPermission->id, $updateEventPermission->id, $deleteEventPermission->id]);
 
-        $role = new Role();
-        $role->name = 'manager';
-        $role->save();
-        $role->permissions()->attach($permission);
-        $permission->roles()->attach($role);
+        $manager = Role::create(['name' => 'manager']);
+        $manager->permissions()->attach([$createEventPermission->id, $updateEventPermission->id, $deleteEventPermission->id, $createCategoryPermission->id, $updateCategoryPermission->id, $deleteCategoryPermission->id]);
 
-        $manager = Role::where('name', 'manager')->first();
-        $organizer = Role::where('name', 'organizer')->first();
-        // $create_event = Permission::where('name', 'create-event')->first();
-        // $create_category = Permission::where('name', 'create-category')->first();
+        $spectator = Role::create(['name' => 'spectator']);
+        // $manager->permissions()->attach([$createEventPermission->id, $updateEventPermission->id, $deleteEventPermission->id, $createCategoryPermission->id, $updateCategoryPermission->id, $deleteCategoryPermission->id]);
 
+        // Create admin user and assign manager role
         $admin = new User();
         $admin->name = 'Admin';
         $admin->email = 'admin@gmail.com';
         $admin->password = bcrypt('admin');
         $admin->save();
         $admin->roles()->attach($manager);
-        // $admin->permissions()->attach($create_category);
 
+        // Create organizer user and assign organizer role
         $user = new User();
-        $user->name = 'organizer';
+        $user->name = 'Organizer';
         $user->email = 'organizer@gmail.com';
         $user->password = bcrypt('organizer');
         $user->save();
         $user->roles()->attach($organizer);
-        // $user->permissions()->attach($create_event);
+
+        // Create spectator user and assign spectator role
+        $user = new User();
+        $user->name = 'Spectator';
+        $user->email = 'spectator@gmail.com';
+        $user->password = bcrypt('spectator');
+        $user->save();
+        $user->roles()->attach($spectator);
     }
 }
