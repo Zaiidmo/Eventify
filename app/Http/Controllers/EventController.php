@@ -66,6 +66,11 @@ class EventController extends Controller
     {
         $categories = Category::all();
         $event = Event::find($id);
+        if ($event && $event->status !== 'approved') {
+            // Redirect the user or display a message
+            return redirect('/')->with('error', 'Unpublished Events Cannot be Reached.');
+        }
+    
         return view('events.show', ['event' => $event , 'categories' => $categories]);
     }
 
@@ -123,10 +128,12 @@ class EventController extends Controller
     }
     public function approve(Event $event)
     {
+        $user = auth()->user();
         // Check if the authenticated user is a manager
-        if (auth()->user()->hasRole('manager')) {
+        if ($user->hasRole('manager')) {
             // Update the event status to approved
             $event->update(['status' => 'approved']);
+            dd($event);
             // dd($event);
 
             // Redirect with a success message

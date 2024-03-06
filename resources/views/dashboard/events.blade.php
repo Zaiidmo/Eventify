@@ -13,6 +13,18 @@
                     <h1 class="text-4xl md:text-6xl font-supermercado font-medium text-subtle ">Posted <span class="text-primary">Events</span></h1>
                     <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">{{$countEvents}} events</span>
                 </div>
+
+                @if ($errors->any())
+                <div class="bg-red-100 mb-4 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative" role="alert">
+                    <strong class="font-bold">Whoops!</strong>
+                    <span class="block sm:inline">There were some problems with your input.</span>
+                    <ul class="list-disc mt-2 ml-4">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             
                 <div class="flex flex-col mt-6">
                     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

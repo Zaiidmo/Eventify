@@ -20,7 +20,7 @@ class Event extends Model
         'date',
         'location',
         'poster',
-        // 'status', // 'pending', 'approved', 'rejected', 'cancelled',
+        'status', // 'pending', 'approved', 'rejected', 'cancelled',
         'capacity',
         'available_tickets',
         'ticket_price',
