@@ -1,5 +1,5 @@
 <aside
-    class="hidden lg:flex flex-col w-72 h-fit px-4 py-8 overflow-y-auto bg-black absolute top-10 left-10 rounded-xl">
+    class="hidden lg:flex flex-col w-72 h-fit px-4 py-8 overflow-y-auto bg-black absolute top-6 left-10 rounded-xl">
     <a href="/" class="mx-auto">
         <img class="w-auto h-6 sm:h-7" src="{{ asset('Logo.png') }}" alt="Eventify logo">
     </a>
@@ -108,8 +108,16 @@
 
                     <span class="mx-4 font-medium">My Statistics</span>
                 </a>
-
-
+                <form action="{{route('logout')}}" method="POST">
+                    @csrf
+                    <button type="submit" class="flex w-full items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-primary dark:hover:text-gray-200 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h7v2H5v14h7v2zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5z"/></svg>
+    
+                        <span class="mx-4 font-medium">LogOut</span>
+                    </button>
+                </form>
+                
+                
             </div>
         </nav>
 </aside>
