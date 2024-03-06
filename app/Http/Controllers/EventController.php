@@ -6,6 +6,7 @@ use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Category;
 use App\Models\Event;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -81,7 +82,26 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
-        //
+        if(Auth::id() !== $event->user_id){
+            return redirect()->route('events.show', $event)->with('error', 'You are not authorized to update this event.');
+        }
+        $validatedData = $request->validated();
+
+        if ($request->hasFile('poster')) {
+            // Generate a unique filename for the poster
+            $fileName = time() . '_' . $request->file('poster')->getClientOriginalName();
+            // Store the poster in the storage
+            $request->file('poster')->storeAs('public/uploads/events', $fileName);
+            // Update the poster attribute in the validated data
+            $validatedData['poster'] = $fileName;
+        }
+    
+        // Update the event with the validated data
+        $event->update($validatedData);
+    
+        // Redirect back to the event details page or any other appropriate route
+        return redirect()->route('events.show', $event)->with('success', 'Event updated successfully');
+
     }
 
     /**

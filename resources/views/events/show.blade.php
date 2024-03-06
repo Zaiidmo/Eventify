@@ -104,7 +104,7 @@
 
                     <form class="mx-8 my-8 lg:mx-0 font-poppins font-semibold tracking-wide" action="{{ route('events.update',['event' => $event]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                    
+                        @method('PUT')
                         <div class="flex flex-row justify-between mt-8 gap-8">
                             <div class="w-full">
                                 <label for="Event Title" class="block text-sm text-gray-500 dark:text-gray-300">Event Title</label>
