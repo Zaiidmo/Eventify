@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Event extends Model
 {
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->attributes['available_tickets'] = $this->attributes['capacity'] ?? 0;
+    }
     use HasFactory, SoftDeletes;
     protected $fillable = [
         'title',
@@ -15,7 +20,8 @@ class Event extends Model
         'date',
         'location',
         'poster',
-        'status', // 'pending', 'approved', 'rejected', 'cancelled',
+        // 'status', // 'pending', 'approved', 'rejected', 'cancelled',
+        'capacity',
         'available_tickets',
         'ticket_price',
         'mode',

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('date');
             $table->string('location');
             $table->string('poster')->default('defaultEventPoster.png');
+            $table->integer('capacity');
             $table->integer('available_tickets');
             $table->float('ticket_price');
             $table->enum('mode', ['auto', 'manual']);

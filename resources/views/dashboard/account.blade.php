@@ -1,4 +1,4 @@
-@extends('layouts.nofooterMaster')
+@extends('layouts.app')
 
 @section('title')
     {{ $authUser->name }} | Account
