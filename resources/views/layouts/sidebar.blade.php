@@ -1,3 +1,4 @@
+
 <aside
     class="hidden lg:flex flex-col w-72 h-fit px-4 py-8 overflow-y-auto bg-black absolute top-6 left-10 rounded-xl">
     <a href="/" class="mx-auto">
