@@ -75,20 +75,47 @@ class EventController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Event $event)
-{
-    // Check if the authenticated user is a manager or the organizer of the event
-    if (auth()->user()->hasRole('manager') || auth()->user()->id === $event->user_id) {
-        // Delete the event
-        $event->delete();
+    {
+        // Check if the authenticated user is a manager or the organizer of the event
+        if (auth()->user()->hasRole('manager') || auth()->user()->id === $event->user_id) {
+            // Delete the event
+            $event->delete();
 
-        // Redirect to a specific route or view with a success message
-        return redirect()->route('events.index')->with('success', 'Event deleted successfully');
+            // Redirect to a specific route or view with a success message
+            return redirect()->route('eventsManagement')->with('success', 'Event deleted successfully');
+        }
+
+        // If not authorized, redirect back with an error message
+        return redirect()->back()->with('error', 'You are not authorized to delete this event.');
+    }
+    public function approve(Event $event)
+{
+    // Check if the authenticated user is a manager
+    if (auth()->user()->hasRole('manager')) {
+        // Update the event status to approved
+        $event->update(['status' => 'approved']);
+        // dd($event);
+
+        // Redirect with a success message
+        return redirect()->route('eventsManagement')->with('success', 'Event approved successfully');
     }
 
     // If not authorized, redirect back with an error message
-    return redirect()->back()->with('error', 'You are not authorized to delete this event.');
+    return redirect()->back()->with('error', 'You are not authorized to approve events.');
 }
 
+    public function deny(Event $event)
+{
+    // Check if the authenticated user is a manager
+    if (auth()->user()->hasRole('manager')) {
+        // Update the event status to denied
+        $event->update(['status' => 'denied']);
 
+        // Redirect with a success message
+        return redirect()->route('eventsManagement')->with('success', 'Event denied successfully');
+    }
 
+    // If not authorized, redirect back with an error message
+    return redirect()->back()->with('error', 'You are not authorized to deny events.');
+}
 }

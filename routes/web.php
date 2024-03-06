@@ -43,10 +43,10 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/users', [AdminController::class, 'users'])->name('users');
-    Route::get('/eventsManagement', [AdminController::class, 'allEvents'])->name('eventsManagement') ;
-    Route::get('/tickets', [AdminController::class, 'tickets'])->name('Tickets') ;
-    Route::get('/categories', [AdminController::class, 'categories'])->name('categories') ;
-    Route::get('/settings', [AdminController::class, 'settings'])->name('settings') ;
+    Route::get('/eventsManagement', [AdminController::class, 'allEvents'])->name('eventsManagement');
+    Route::get('/tickets', [AdminController::class, 'tickets'])->name('Tickets');
+    Route::get('/categories', [AdminController::class, 'categories'])->name('categories');
+    Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
 });
 // Route::resource('events', EventController::class);
 Route::group(['middleware' => 'auth'], function () {
@@ -57,6 +57,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
     Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+    Route::put('/events/{event}/approve', [EventController::class, 'approve'])->name('events.approve');
+    Route::put('/events/{event}/deny', [EventController::class, 'deny'])->name('events.deny');
 });
 
 Route::group(['middleware' => 'guest'], function () {
@@ -69,5 +71,3 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/reset-password', [ResetPasswordController::class, 'resetPasswordView'])->name('password.reset');
     Route::put('/reset', [ResetPasswordController::class, 'resetPassword'])->name('reset');
 });
-
-
