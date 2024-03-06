@@ -18,3 +18,8 @@
 
 </section>
 @endsection
+@section('scripts')
+@auth
+    <script src="{{ mix('resources/js/authNavbar.js') }}"></script>
+@endauth
+@endsection

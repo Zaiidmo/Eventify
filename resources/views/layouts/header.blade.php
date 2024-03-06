@@ -15,20 +15,70 @@
             </button>
         </div>
         @auth
-            <form action="{{ route('logout')}}" method="POST">
-                @csrf
-                <button type="submit"
-                    class=" py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block ">
-                    Logout
-                </button>
-            </form>
-        @else
-        <a href="/login">
-            <button id="login-btn"
-                class=" py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block ">
-                Sign In
+        <div class="flex flex-col z-40 items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse relative">
+            <button type="button"
+                class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
+                data-dropdown-placement="bottom">
+                <span class="sr-only">Open user menu</span>
+                <img class="w-10 h-10 rounded-full"
+                    src="{{ asset('storage/uploads/profiles/' . auth()->user()->avatar) }}" alt="user photo">
             </button>
-        </a>
+            <!-- Dropdown menu -->
+                <div class="z-50 hidden my-4 top-14 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow absolute dark:bg-gray-700 dark:divide-gray-600"
+                    id="user-dropdown">
+                    <div class="px-4 py-3">
+                        <span class="block text-sm text-gray-900 dark:text-white">{{ auth()->user()->name }}</span>
+                        <span
+                            class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{ auth()->user()->email }}</span>
+                    </div>
+                    <ul class="py-2 px-3 rounded-lg" aria-labelledby="user-menu-button">
+                        <li>   
+                            <a href="/"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white rounded-lg">Home</a>
+                        </li>
+                        <li>
+                            @if (auth()->user()->hasRole('manager'))
+                                <a href="{{ route('dashboard') }}"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white rounded-lg">Dashboard</a>
+                            @elseif (auth()->user()->hasRole('organizer'))
+                                <a href="{{ route('account') }}"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white rounded-lg">My Account</a>
+                             @endif
+                        </li>
+                        {{-- <li>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
+                        </li> --}}
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit"
+                                    class="w-full py-1 px-8 text-xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block ">
+                                    Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <button data-collapse-toggle="navbar-user" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    aria-controls="navbar-user" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+            </div>
+        @else
+            <a href="/login">
+                <button id="login-btn"
+                    class=" py-1.5 px-8 m-1 text-2xl text-center bg-primary font-buttons rounded-md text-white lg:inline-block ">
+                    Sign In
+                </button>
+            </a>
         @endauth
     </nav>
 

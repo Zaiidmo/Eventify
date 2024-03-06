@@ -198,4 +198,7 @@
 @endsection
 @section('scripts')
 <script src="{{ mix('resources/js/event.js') }}"></script>
+@auth
+<script src="{{ mix('resources/js/authNavbar.js') }}"></script>
+@endauth
 @endsection
