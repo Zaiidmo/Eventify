@@ -4,3 +4,4 @@ document.getElementById('toggle-update-modal').addEventListener('click', functio
 document.getElementById('update-popup-close').addEventListener('click', function() {
     document.getElementById('update-popup').classList.add('hidden');
 });
+d
