@@ -47,6 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/tickets', [AdminController::class, 'tickets'])->name('Tickets');
     Route::get('/categories', [AdminController::class, 'categories'])->name('categories');
     Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
+    Route::get('/account', [AdminController::class, 'account'])->name('account');
 });
 // Route::resource('events', EventController::class);
 Route::group(['middleware' => 'auth'], function () {

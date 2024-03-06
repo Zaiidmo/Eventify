@@ -14,6 +14,7 @@
 
     <div class="flex flex-col justify-between flex-1 mt-6">
         <nav class="space-y-6">
+            @role('manager')
             <div>
                 <label class="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">Admin</label>
 
@@ -83,6 +84,7 @@
                     <span class="mx-4 font-medium">Settings</span>
                 </a>
             </div>
+            @endrole
             <div>
                 <label class="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">Users Navigation</label>
 
