@@ -10,7 +10,7 @@
             <h1 class="text-4xl font-supermercado text-white">{{ $event->title }}</h1>
             <div class="font-buttons w-fit bg-transparent text-secondary border-primary border flex justify-between items-center px-6 rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M27.87 7.863L23.024 4.82l-7.89 12.566l4.843 3.04zM14.395 21.25l-.107 2.855l2.527-1.337l2.35-1.24l-4.673-2.936zM29.163 3.24L26.63 1.647a1.364 1.364 0 0 0-1.88.43l-1 1.588l4.843 3.042l1-1.586c.4-.64.21-1.483-.43-1.883zm-3.965 23.82c0 .275-.225.5-.5.5h-19a.5.5 0 0 1-.5-.5v-19a.5.5 0 0 1 .5-.5h13.244l1.884-3H5.698c-1.93 0-3.5 1.57-3.5 3.5v19c0 1.93 1.57 3.5 3.5 3.5h19c1.93 0 3.5-1.57 3.5-3.5V11.097l-3 4.776v11.19z"/></svg>
-                <button>Edit this Event</button=>
+                <button id="toggle-update-modal">Edit this Event</button=>
             </div>
             <div class="font-buttons w-fit bg-secondary flex justify-between items-center px-6 rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="#000000" d="m426.24 127.72l-10.94 10.94a29.67 29.67 0 0 1-42-42l10.94-10.94L314.52 16l-88 88l-4 12.09l-12.09 4L16 314.52l69.76 69.76l10.94-10.94a29.67 29.67 0 0 1 42 42l-10.94 10.94L197.48 496l194.4-194.4l4-12.09l12.09-4l88-88Zm-208.56 5.43l21.87-21.87l33 33l-21.88 21.87Zm43 43l21.88-21.88l32.52 32.52l-21.88 21.88Zm42.56 42.56l21.88-21.88l32.52 32.52l-21.84 21.93Zm75.57 75.56l-33-33l21.87-21.88l33 33Z"/></svg>
@@ -74,4 +74,128 @@
         </div>
     </div>
 </section>
+<section id="update-popup" class="hidden">
+    <div id="update-popup" 
+        class="bg-black/50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 h-full items-center justify-center flex">
+        <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+
+            <div class="relative bg-black border-2 border-primary rounded-lg shadow">
+                <button id="update-popup-close" type="button"
+                    class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center popup-close"><svg
+                        aria-hidden="true" class="w-5 h-5" fill="#c6c7c7" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            cliprule="evenodd"></path>
+                    </svg>
+                    <span class="sr-only">Close popup</span>
+                </button>
+
+                <div class="p-5">
+
+                    <div class="text-center">
+                        <p class="mb-3 text-2xl font-semibold leading-10 text-subtle">
+                            Update The Event 
+                        </p>
+                        <p class="mb-3 text-2xl font-buttons font-semibold leading-10 text-subtle">
+                            {{$event->title}} 
+                        </p>
+                    </div>
+
+                    <form class="mx-8 my-8 lg:mx-0 font-poppins font-semibold tracking-wide" action="{{ route('events.update',['event' => $event]) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                    
+                        <div class="flex flex-row justify-between mt-8 gap-8">
+                            <div class="w-full">
+                                <label for="Event Title" class="block text-sm text-gray-500 dark:text-gray-300">Event Title</label>
+                                <input type="text" value="{{ $event->title}}" name="title" class="block mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40" required />
+                            </div>
+                            <div class="w-full">
+                                <label for="Event Location" class="block text-sm text-gray-500 dark:text-gray-300">Category</label>
+                                <select name="category_id" class="block mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40" required>
+                                    <option selected disabled>{{ $event->category->name}}</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    
+                        <div class="mt-8">
+                            <label for="event-description" class="block text-sm text-gray-500 dark:text-gray-300">Event Description</label>
+                            <textarea id="event-description" name="description" placeholder="Let's have fun..." class="block mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40" required></textarea>
+                        </div>
+        
+        
+                        <div class="flex flex-row justify-between mt-8 gap-8">
+                            <div class="w-full">
+                                <label for="Event date" class="block text-sm text-gray-500 dark:text-gray-300">Event
+                                    date</label>
+                                <input type="date" value="{{ $event->date}}" name="date"
+                                    class="block  mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 " />
+                            </div>
+                            <div class="w-full">
+                                <label for="Event Location" class="block text-sm text-gray-500 dark:text-gray-300">Event
+                                    Location</label>
+                                <input type="text" value="{{ $event->location}}" name="location"
+                                    class="block  mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 " />
+                            </div>
+                        </div>
+        
+                        <div class="flex flex-row justify-between mt-8 gap-8">
+                            <div class="w-full">
+                                <label for="Event Capacity" class="block text-sm text-gray-500 dark:text-gray-300">Event
+                                    Capacity</label>
+                                <input type="text" value="{{ $event->capacity}}" name="capacity"
+                                    class="block  mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 " />
+                            </div>
+                            <div class="w-full">
+                                <label for="Ticket Price" class="block text-sm text-gray-500 dark:text-gray-300">Ticket
+                                    Price</label>
+                                <input type="text" value="$ {{ $event->ticket_price }}" name="ticket_price"
+                                    class="block  mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 " />
+                            </div>
+                            <div class="w-full">
+                                <label for="Reservation Mode" class="block text-sm text-gray-500 dark:text-gray-300">Reservation Mode</label>
+                                <select name="mode" class="block mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40" required>
+                                    <option selected disabled>{{ $event->mode }}</option>
+                                    <option  value="auto">auto</option>
+                                    <option  value="manual">manual</option>
+                                </select>
+                                
+                            </div>
+                        </div>
+        
+                        <div class="mt-8 w-full">
+                            <label for="poster" class="block text-sm text-gray-500 dark:text-gray-300">Upload a Poster</label>
+                            <label for="poster" class="flex flex-col items-center w-full p-5 mt-2 text-center bg-gray-700 border-2 border-gray-200 border-dashed cursor-pointer rounded-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-8 h-8 text-gray-500 dark:text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                            </svg>
+        
+                            <h2 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">Upload a poster</h2>
+        
+                            <p class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">Upload or darg & drop your
+                                file JPG, JPEG, PNG. </p>                        <input name="poster" id="poster" type="file" class="hidden" required />
+                            </label>
+                        </div>
+                    
+                        <!-- Submit button -->
+                        <button type="submit" class="mt-8 py-2.5 w-full border-2 border-secondary text-lg font-poppins tracking-widest font-bold rounded-lg text-subtle">
+                            U P D A T E
+                        </button>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+@endsection
+@section('scripts')
+<script src="{{ mix('resources/js/event.js') }}"></script>
 @endsection

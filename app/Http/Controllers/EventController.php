@@ -63,8 +63,9 @@ class EventController extends Controller
      */
     public function show(String $id)
     {
+        $categories = Category::all();
         $event = Event::find($id);
-        return view('events.show', ['event' => $event]);
+        return view('events.show', ['event' => $event , 'categories' => $categories]);
     }
 
     /**
