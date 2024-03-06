@@ -35,42 +35,15 @@
         <div class="container px-6 py-16 mx-auto">
             <h1 class="text-4xl font-supermercado text-white">Explore Categories </h1>
             <div class="mt-5 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 ">
+                @foreach($categories as $category)
                 <div class="h-auto text-center flex flex-col gap-4 justify-between items-center">
                     <img src="{{ asset('events.png') }}" alt="events Image" class="rounded-full w-1/2 h-1/2" />
                     <a href="#">
-                        <h5 class="text-white font-poppins text-xl font-bold tracking-widest">Category Title</h5>
+                        <h5 class="text-white font-poppins text-xl font-bold tracking-widest">{{ $category->name}}</h5>
                     </a>
                 </div>
-                <div class="h-auto text-center flex flex-col gap-4 justify-between items-center">
-                    <img src="{{ asset('events.png') }}" alt="events Image" class="rounded-full w-1/2 h-1/2" />
-                    <a href="#">
-                        <h5 class="text-white font-poppins text-xl font-bold tracking-widest">Category Title</h5>
-                    </a>
-                </div>
-                <div class="h-auto text-center flex flex-col gap-4 justify-between items-center">
-                    <img src="{{ asset('events.png') }}" alt="events Image" class="rounded-full w-1/2 h-1/2" />
-                    <a href="#">
-                        <h5 class="text-white font-poppins text-xl font-bold tracking-widest">Category Title</h5>
-                    </a>
-                </div>
-                <div class="h-auto text-center flex flex-col gap-4 justify-between items-center">
-                    <img src="{{ asset('events.png') }}" alt="events Image" class="rounded-full w-1/2 h-1/2" />
-                    <a href="#">
-                        <h5 class="text-white font-poppins text-xl font-bold tracking-widest">Category Title</h5>
-                    </a>
-                </div>
-                <div class="h-auto text-center flex flex-col gap-4 justify-between items-center">
-                    <img src="{{ asset('events.png') }}" alt="events Image" class="rounded-full w-1/2 h-1/2" />
-                    <a href="#">
-                        <h5 class="text-white font-poppins text-xl font-bold tracking-widest">Category Title</h5>
-                    </a>
-                </div>
-                <div class="h-auto text-center flex flex-col gap-4 justify-between items-center">
-                    <img src="{{ asset('events.png') }}" alt="events Image" class="rounded-full w-1/2 h-1/2" />
-                    <a href="#">
-                        <h5 class="text-white font-poppins text-xl font-bold tracking-widest">Category Title</h5>
-                    </a>
-                </div>
+                @endforeach
+                
             </div>
         </div>
     </section>
