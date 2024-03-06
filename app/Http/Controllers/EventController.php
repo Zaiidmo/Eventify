@@ -20,7 +20,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        return view('events.index');
+        $events = Event::paginate(6);
+        return view('events.index', ['events' => $events]);
     }
 
     /**
@@ -62,7 +63,7 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(String $id)
+    public function show(string $id)
     {
         $categories = Category::all();
         $event = Event::find($id);
@@ -70,8 +71,8 @@ class EventController extends Controller
             // Redirect the user or display a message
             return redirect('/')->with('error', 'Unpublished Events Cannot be Reached.');
         }
-    
-        return view('events.show', ['event' => $event , 'categories' => $categories]);
+
+        return view('events.show', ['event' => $event, 'categories' => $categories]);
     }
 
     /**
@@ -87,7 +88,7 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
-        if(Auth::id() !== $event->user_id){
+        if (Auth::id() !== $event->user_id) {
             return redirect()->route('events.show', $event)->with('error', 'You are not authorized to update this event.');
         }
         $validatedData = $request->validated();
@@ -100,13 +101,12 @@ class EventController extends Controller
             // Update the poster attribute in the validated data
             $validatedData['poster'] = $fileName;
         }
-    
+
         // Update the event with the validated data
         $event->update($validatedData);
-    
+
         // Redirect back to the event details page or any other appropriate route
         return redirect()->route('events.show', $event)->with('success', 'Event updated successfully');
-
     }
 
     /**
@@ -133,7 +133,6 @@ class EventController extends Controller
         if ($user->hasRole('manager')) {
             // Update the event status to approved
             $event->update(['status' => 'approved']);
-            dd($event);
             // dd($event);
 
             // Redirect with a success message

@@ -77,105 +77,27 @@
     <section>
         <div class="container px-6 py-16 mx-auto">
             <h1 class="text-4xl font-supermercado text-white">Up Coming Events </h1>
-            <div class="mt-5 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <div class="my-5 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                @foreach($events as $event)
                 <a class="flex flex-col group bg-component border shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition "
                     href="#">
-                    <div class="relative pt-[50%] sm:pt-[60%] lg:pt-[80%] rounded-t-xl overflow-hidden">
-                        <img class="size-full absolute top-0 start-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl"
-                            src="{{ asset('images/event.jpg') }}" alt="Image Description">
+                    <div class="relative pt-[50%] sm:pt-[60%]  rounded-t-xl overflow-hidden">
+                        <img class=" absolute top-0 start-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl"
+                            src="{{ asset('storage/uploads/events/' . $event->poster )}}" alt="Event Photo">
                     </div>
                     <div class="p-4 md:p-5">
                         <h3 class="text-lg font-bold text-white">
-                            Card title
+                            {{ $event->title}}
                         </h3>
                         <p class="mt-1 text-subtle">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
+                           Category : {{ $event->category->name }}
                         </p>
                     </div>
                 </a>
 
-                <a class="flex flex-col group bg-component border shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition "
-                    href="#">
-                    <div class="relative pt-[50%] sm:pt-[60%] lg:pt-[80%] rounded-t-xl overflow-hidden">
-                        <img class="size-full absolute top-0 start-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl"
-                            src="{{ asset('images/event.jpg') }}" alt="Image Description">
-                    </div>
-                    <div class="p-4 md:p-5">
-                        <h3 class="text-lg font-bold text-white">
-                            Card title
-                        </h3>
-                        <p class="mt-1 text-subtle">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
-                    </div>
-                </a>
-
-                <a class="flex flex-col group bg-component border shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition "
-                    href="#">
-                    <div class="relative pt-[50%] sm:pt-[60%] lg:pt-[80%] rounded-t-xl overflow-hidden">
-                        <img class="size-full absolute top-0 start-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl"
-                            src="{{ asset('images/event.jpg') }}" alt="Image Description">
-                    </div>
-                    <div class="p-4 md:p-5">
-                        <h3 class="text-lg font-bold text-white">
-                            Card title
-                        </h3>
-                        <p class="mt-1 text-subtle">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
-                    </div>
-                </a>
-
-                <a class="flex flex-col group bg-component border shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition "
-                    href="#">
-                    <div class="relative pt-[50%] sm:pt-[60%] lg:pt-[80%] rounded-t-xl overflow-hidden">
-                        <img class="size-full absolute top-0 start-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl"
-                            src="{{ asset('images/event.jpg') }}" alt="Image Description">
-                    </div>
-                    <div class="p-4 md:p-5">
-                        <h3 class="text-lg font-bold text-white">
-                            Card title
-                        </h3>
-                        <p class="mt-1 text-subtle">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
-                    </div>
-                </a>
-
-                <a class="flex flex-col group bg-component border shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition "
-                    href="#">
-                    <div class="relative pt-[50%] sm:pt-[60%] lg:pt-[80%] rounded-t-xl overflow-hidden">
-                        <img class="size-full absolute top-0 start-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl"
-                            src="{{ asset('images/event.jpg') }}" alt="Image Description">
-                    </div>
-                    <div class="p-4 md:p-5">
-                        <h3 class="text-lg font-bold text-white">
-                            Card title
-                        </h3>
-                        <p class="mt-1 text-subtle">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
-                    </div>
-                </a>
-
-                <a class="flex flex-col group bg-component border shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition "
-                    href="#">
-                    <div class="relative pt-[50%] sm:pt-[60%] lg:pt-[80%] rounded-t-xl overflow-hidden">
-                        <img class="size-full absolute top-0 start-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl"
-                            src="{{ asset('images/event.jpg') }}" alt="Image Description">
-                    </div>
-                    <div class="p-4 md:p-5">
-                        <h3 class="text-lg font-bold text-gray-800 dark:text-white">
-                            Card title
-                        </h3>
-                        <p class="mt-1 text-subtle">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
-                    </div>
-                </a>
-
-
+                @endforeach
             </div>
+            {{ $events->links() }}
         </div>
     </section>
 @endsection
