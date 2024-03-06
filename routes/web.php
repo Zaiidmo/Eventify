@@ -43,6 +43,10 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/users', [AdminController::class, 'users'])->name('users');
+    Route::get('/eventsManagement', [AdminController::class, 'allEvents'])->name('eventsManagement') ;
+    Route::get('/tickets', [AdminController::class, 'tickets'])->name('Tickets') ;
+    Route::get('/categories', [AdminController::class, 'categories'])->name('categories') ;
+    Route::get('/settings', [AdminController::class, 'settings'])->name('settings') ;
 });
 // Route::resource('events', EventController::class);
 Route::group(['middleware' => 'auth'], function () {

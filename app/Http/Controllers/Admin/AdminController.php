@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -12,14 +14,24 @@ class AdminController extends Controller
     }
     public function dashboard()
     {
-        return view('dashboard.index');
+                
+        return view('dashboard.index', [
+            'authUser' =>auth()->user(),
+            'users' => User::all()
+        ]);
     }
     public function users()
     {
-        return view('dashboard.users');
+        return view('dashboard.users', [
+            'authUser' =>auth()->user(),
+            'users' => User::all()
+        ]);
     }
     public function allEvents()
     {
-        return view('dashboard.events');   
+        return view('dashboard.events', [
+            'authUser' =>auth()->user(),
+            'events' => Event::all()
+        ]);  
     }
 }
