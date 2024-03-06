@@ -59,13 +59,13 @@ trait HasPermissionsTrait
     {
         return $this->belongsToMany(Role::class, 'users_roles');
     }
-    public function permissions()
-    {
-        return $this->belongsToMany(Permission::class, 'users_permissions');
-    }
+    // public function permissions()
+    // {
+    //     return $this->belongsToMany(Permission::class, 'users_permissions');
+    // }
     protected function hasPermission($permission)
     {
-        return (bool) $this->permissions->where('name', $permission->name)->count();
+        return (bool) $this->role()->permissions->where('name', $permission->name)->count();
     }
 
     protected function getAllPermissions(array $permissions)

@@ -8,6 +8,10 @@ use App\Models\Event;
 
 class EventController extends Controller
 {
+    public function __construct(){
+        $this->middleware('role:organizer,manager',['except' => ['index','show']]); // Only organizer can create, update and delete
+    }
+
     /**
      * Display a listing of the resource.
      */

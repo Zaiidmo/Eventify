@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    public function __construct(){
+        $this->middleware('role:manager'); // Only Managers Can Acceess these Methods
+    }
     public function dashboard()
     {
         return view('dashboard.index');
