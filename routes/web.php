@@ -50,11 +50,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/users', [AdminController::class, 'users'])->name('users');
     Route::get('/eventsManagement', [AdminController::class, 'allEvents'])->name('eventsManagement');
     Route::get('/tickets', [AdminController::class, 'tickets'])->name('Tickets');
-    Route::get('/categories', [AdminController::class, 'categories'])->name('categories');
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
     Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
     Route::get('/account', [AdminController::class, 'account'])->name('account');
 });
-// Route::resource('events', EventController::class);
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');

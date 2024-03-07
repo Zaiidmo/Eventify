@@ -13,7 +13,14 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $countCategories = Category::count();
+        $categories = Category::paginate(8);
+        $authUser = auth()->user();
+        return view('dashboard.categories', [
+            'categories' => $categories,
+            'authUser' => $authUser,
+            'countCategories' => $countCategories
+        ]);
     }
 
     /**
