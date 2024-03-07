@@ -8,6 +8,10 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:manager');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -28,7 +32,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -36,7 +40,12 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        $fileName = $request->name . '.' . $request->file('image')->getClientOriginalName();
+        $request->image->storeAs('public/uploads/categories', $fileName);
+        $validatedData['image'] = $fileName;
+        Category::create($validatedData);
+        return redirect()->route('categories')->with('success', 'Category created successfully!');
     }
 
     /**

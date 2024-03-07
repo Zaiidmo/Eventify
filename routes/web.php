@@ -26,35 +26,22 @@ Route::get('/', function () {
     return view('welcome', ['events' => $events , 'topCategories' => $topCategories]);
 });
 
-// Route::resource('events', 'EventController');
-// Route::get('/eventsshow', function () {
-//     return view('events.show');
-// });
-// Route::get('/events', function () {
-//     return view('events.index');
-// });
-
-// Route::get('/admin', function () {
-//     return view('dashboard.index');
-// });
-// Route::get('/users', function () {
-//     return view('dashboard.users');
-// });
-//Authenticating
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
+//Admin Routes
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/users', [AdminController::class, 'users'])->name('users');
     Route::get('/eventsManagement', [AdminController::class, 'allEvents'])->name('eventsManagement');
     Route::get('/tickets', [AdminController::class, 'tickets'])->name('Tickets');
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
     Route::get('/account', [AdminController::class, 'account'])->name('account');
 });
-
+//Organizers {{Events Routes}}
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
@@ -66,7 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/events/{event}/approve', [EventController::class, 'approve'])->name('events.approve');
     Route::put('/events/{event}/deny', [EventController::class, 'deny'])->name('events.deny');
 });
-
+//Guests
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [AuthController::class, 'loginView'])->name('loginView');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
