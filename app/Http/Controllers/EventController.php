@@ -21,7 +21,7 @@ class EventController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $events = Event::paginate(6);
+        $events = Event::where('status', 'approved')->paginate(6);
         return view('events.index', ['events' => $events , 'categories' => $categories]);
     }
 

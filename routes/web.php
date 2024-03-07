@@ -3,7 +3,10 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
+use App\Models\Category;
+use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +21,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $topCategories = Category::withCount('events')->orderByDesc('events_count')->take(3)->get();
+    $events = Event::where('status', 'approved')->latest()->take(4)->get();
+    return view('welcome', ['events' => $events , 'topCategories' => $topCategories]);
 });
 
 // Route::resource('events', 'EventController');
