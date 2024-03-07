@@ -44,10 +44,14 @@ class TicketController extends Controller
         }
 
         if ($this->hasAvailableTickets($event)) {
-            $this->createTicket($event, $userId);
+            $ticket = $this->createTicket($event, $userId);
             // Send email confirmation to the user
             // Mail::to(auth()->user()->email)->send(new TicketPurchased($event));
-            return redirect()->back()->with('success', 'Ticket purchased successfully!');
+            if ($ticket->status === 'approved') {
+                return redirect()->back()->with('success', 'Ticket purchased successfully!');
+            } else {
+                return redirect()->back()->with('success', 'Ticket reserved successfully! Please wait for approval.');
+            }
         }
 
         return redirect()->back()->with('error', 'No available tickets for this event.');
@@ -95,6 +99,8 @@ class TicketController extends Controller
         $ticket->price = $event->ticket_price; // Set the ticket price based on the event
         $ticket->status = $ticketStatus;
         $ticket->save();
+
+        return $ticket;
     }
     protected function hasPurchasedTicket(Event $event, $userId)
     {
