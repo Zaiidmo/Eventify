@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Models\Event;
 use App\Models\Ticket;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Request;
 
 class TicketController extends Controller
@@ -41,8 +42,19 @@ class TicketController extends Controller
         if ($existingTicket) {
             return redirect()->back()->with('error', 'You have already purchased a ticket for this event.');
         }
-        // Check if there are available tickets for the event
-        if ($event->available_tickets > 0) {
+        // Calculate the event's date and time
+        $eventDateTime = Carbon::parse($event->date . ' ' . $event->time);
+
+        // Calculate the current date and time
+        $currentDateTime = Carbon::now();
+
+        // Calculate the remaining time until the event
+        $remainingTime = $eventDateTime->diffInHours($currentDateTime);
+
+        // Check if the remaining time is less than half a day (12 hours)
+        if ($remainingTime <= 12) {
+            return redirect()->back()->with('error', 'Sorry, you cannot purchase a ticket for this event as it is less than half a day away.');
+        } elseif ($event->available_tickets > 0) {
             $this->createTicket($event, $userId);
 
             // Send email confirmation to the user
