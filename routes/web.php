@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
     Route::get('/account', [AdminController::class, 'account'])->name('account');
 });
