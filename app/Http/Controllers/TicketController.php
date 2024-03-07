@@ -35,35 +35,21 @@ class TicketController extends Controller
         $userId = auth()->id();
 
         // Check if the user has already purchased a ticket for this event
-        $existingTicket = Ticket::where('event_id', $event->id)
-            ->where('user_id', $userId)
-            ->exists();
-
-        if ($existingTicket) {
+        if ($this->hasPurchasedTicket($event, $userId)) {
             return redirect()->back()->with('error', 'You have already purchased a ticket for this event.');
         }
-        // Calculate the event's date and time
-        $eventDateTime = Carbon::parse($event->date . ' ' . $event->time);
 
-        // Calculate the current date and time
-        $currentDateTime = Carbon::now();
-
-        // Calculate the remaining time until the event
-        $remainingTime = $eventDateTime->diffInHours($currentDateTime);
-
-        // Check if the remaining time is less than half a day (12 hours)
-        if ($remainingTime <= 12) {
+        if ($this->isEventNear($event)) {
             return redirect()->back()->with('error', 'Sorry, you cannot purchase a ticket for this event as it is less than half a day away.');
-        } elseif ($event->available_tickets > 0) {
+        }
+        if ($this->hasAvailableTickets($event)) {
             $this->createTicket($event, $userId);
-
             // Send email confirmation to the user
             // Mail::to(auth()->user()->email)->send(new TicketPurchased($event));
-
             return redirect()->back()->with('success', 'Ticket purchased successfully!');
-        } else {
-            return redirect()->back()->with('error', 'No available tickets for this event.');
         }
+
+        return redirect()->back()->with('error', 'No available tickets for this event.');
     }
 
     /**
@@ -108,5 +94,22 @@ class TicketController extends Controller
             $ticket->status = 'approved';
         }
         $ticket->save();
+    }
+    protected function hasPurchasedTicket(Event $event, $userId)
+    {
+        return Ticket::where('event_id', $event->id)
+            ->where('user_id', $userId)
+            ->exists();
+    }
+    protected function isEventNear(Event $event)
+    {
+        $eventDateTime = Carbon::parse($event->date . ' ' . $event->time);
+        $currentDateTime = Carbon::now();
+        $remainingTime = $eventDateTime->diffInHours($currentDateTime);
+        return $remainingTime <= 12;
+    }
+    protected function hasAvailableTickets(Event $event)
+    {
+        return $event->available_tickets > 0;
     }
 }
