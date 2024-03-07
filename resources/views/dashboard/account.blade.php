@@ -51,6 +51,7 @@
                 {{ $authUser->events()->paginate(5)->links() }} <!-- Pagination links -->
 
             </div>
+            
     </section>
 @endsection
 @section('scripts')

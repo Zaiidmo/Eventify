@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('event_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->float('price');
-            $table->date('purshase_date');
+            $table->date('purshase_date')->default(now());
             $table->timestamps();
         });
     }
