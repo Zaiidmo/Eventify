@@ -37,7 +37,7 @@
             <div class="mt-5 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 ">
                 @foreach($categories as $category)
                 <div class="h-auto text-center flex flex-col gap-4 justify-between items-center">
-                    <img src="{{ asset('events.png') }}" alt="events Image" class="rounded-full w-1/2 h-1/2" />
+                    <img src="{{ asset('storage/uploads/categories/' . $category->image ) }}" alt="category Image" class="rounded-full border-secondary border w-24 h-24" />
                     <a href="#">
                         <h5 class="text-white font-poppins text-xl font-bold tracking-widest">{{ $category->name}}</h5>
                     </a>
