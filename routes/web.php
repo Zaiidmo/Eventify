@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/tickets', [AdminController::class, 'tickets'])->name('Tickets');
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
     Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
     Route::get('/account', [AdminController::class, 'account'])->name('account');
 });

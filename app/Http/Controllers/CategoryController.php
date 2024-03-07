@@ -69,8 +69,16 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $validatedUpdatedData = `$request->validated();
-        
+        $validatedUpdatedData = $request->validated();
+        // dd($validatedUpdatedData);
+        if ($request->hasFile('image')) {
+            $fileName = $request->name . '.' . $request->file('image')->getClientOriginalName();
+            $request->image->storeAs('public/uploads/categories', $fileName);
+            $validatedUpdatedData['image'] = $fileName;
+        }
+        $category->update($validatedUpdatedData);
+        return back();
+
     }
 
     /**
