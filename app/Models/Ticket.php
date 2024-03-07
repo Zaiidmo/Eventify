@@ -12,6 +12,7 @@ class Ticket extends Model
         'event_id',
         'user_id',
         'price',
+        'status',
         'purshase_date'
     ];
 

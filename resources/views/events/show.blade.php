@@ -1,23 +1,34 @@
 @extends('layouts.app')
 @section('title', 'Events')
 @section('content')
-<section class="pt-32">
-    <div class="gap-6 items-center py-8 px-4 mx-auto max-w-screen-xl lg:px-6">
-        @if ($errors->any())
-            <div class="bg-red-100 mb-4 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative" role="alert">
-                <strong class="font-bold">Whoops!</strong>
-                <span class="block sm:inline">There were some problems with your input.</span>
-                <ul class="list-disc mt-2 ml-4">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <img class="border-2 border-subtle p-8 w-screen rounded-3xl"
-        src="{{ asset('storage/uploads/events/' . $event->poster) }}" alt="">
-    </div>
-    <div class="gap-6 items-center py-8 px-4 mx-auto max-w-screen-xl lg:px-6">
+    <section class="pt-32">
+        <div class="gap-6 items-center py-8 px-4 mx-auto max-w-screen-xl lg:px-6">
+            @if ($errors->any())
+                <div class="bg-red-100 mb-4 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative" role="alert">
+                    <strong class="font-bold">Whoops!</strong>
+                    <span class="block sm:inline">There were some problems with your input.</span>
+                    <ul class="list-disc mt-2 ml-4">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <img class="border-2 border-subtle p-8 w-screen rounded-3xl"
+            src="{{ asset('storage/uploads/events/' . $event->poster) }}" alt="">
+        </div>
+        <div class="gap-6 items-center py-8 px-4 mx-auto max-w-screen-xl lg:px-6">
+            @if (session('success'))
+                    <div class="bg-green-100 mb-4 border border-green-400 text-green-700 px-4 py-3 rounded-lg relative " role="alert">
+                    {{ session('success') }}
+                    </div>
+            @endif
+    
+            @if (session('error'))
+                    <div class="bg-red-100 mb-4 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative " role="alert">
+                    {{ session('error') }}
+                    </div>
+            @endif
             <div class="flex justify-between ">
                 <h1 class="text-4xl font-supermercado text-white">{{ $event->title }}</h1>
                 @if (Auth::user()->id == $event->user_id)
@@ -29,13 +40,17 @@
                         <button id="toggle-update-modal">Edit this Event</button>
                     </div>
                 @else
-                    <div class="font-buttons w-fit bg-secondary flex justify-between items-center px-6 rounded-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
-                            <path fill="#000000"
-                                d="m426.24 127.72l-10.94 10.94a29.67 29.67 0 0 1-42-42l10.94-10.94L314.52 16l-88 88l-4 12.09l-12.09 4L16 314.52l69.76 69.76l10.94-10.94a29.67 29.67 0 0 1 42 42l-10.94 10.94L197.48 496l194.4-194.4l4-12.09l12.09-4l88-88Zm-208.56 5.43l21.87-21.87l33 33l-21.88 21.87Zm43 43l21.88-21.88l32.52 32.52l-21.88 21.88Zm42.56 42.56l21.88-21.88l32.52 32.52l-21.84 21.93Zm75.57 75.56l-33-33l21.87-21.88l33 33Z" />
-                        </svg>
-                        <a href="#">Buy Ticket</a>
-                    </div>
+                    <form action="{{ route('tickets.store', $event) }}" method="POST">
+                        @csrf
+                        <button type="submit"
+                            class="font-buttons w-fit bg-secondary flex justify-between items-center px-6 py-2 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                                <path fill="#000000"
+                                    d="m426.24 127.72l-10.94 10.94a29.67 29.67 0 0 1-42-42l10.94-10.94L314.52 16l-88 88l-4 12.09l-12.09 4L16 314.52l69.76 69.76l10.94-10.94a29.67 29.67 0 0 1 42 42l-10.94 10.94L197.48 496l194.4-194.4l4-12.09l12.09-4l88-88Zm-208.56 5.43l21.87-21.87l33 33l-21.88 21.87Zm43 43l21.88-21.88l32.52 32.52l-21.88 21.88Zm42.56 42.56l21.88-21.88l32.52 32.52l-21.84 21.93Zm75.57 75.56l-33-33l21.87-21.88l33 33Z" />
+                            </svg>
+                            Buy Ticket
+                        </button>
+                    </form>
                 @endif
             </div>
         </div>
@@ -111,8 +126,8 @@
                 <h4 class="text-white font-poppins text-xl font-bold tracking-widest">Hosted By</h4>
                 <div class="flex flex-col gap-4 justify-between">
                     <div class="flex justify-start items-center  gap-4">
-                        <img class="rounded-full w-24" src="{{ asset('storage/uploads/profiles/' . $event->user->avatar) }}"
-                            alt="User photo">
+                        <img class="rounded-full w-24"
+                            src="{{ asset('storage/uploads/profiles/' . $event->user->avatar) }}" alt="User photo">
                         <div class="flex flex-col justify-between">
                             <p class="text-white font-poppins text-lg">{{ $event->user->name }}</p>
                             <p class="text-white font-poppins text-lg">{{ $event->user->email }}</p>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\TicketController;
 use App\Models\Category;
 use App\Models\Event;
 use Illuminate\Support\Facades\Route;
@@ -65,4 +66,9 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/forgot', [ResetPasswordController::class, 'forgotPassword'])->name('forgot');
     Route::get('/reset-password', [ResetPasswordController::class, 'resetPasswordView'])->name('password.reset');
     Route::put('/reset', [ResetPasswordController::class, 'resetPassword'])->name('reset');
+});
+
+//Tickets 
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/events/{event}/tickets', [TicketController::class, 'store'])->name('tickets.store');
 });
