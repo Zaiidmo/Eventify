@@ -42,6 +42,7 @@ class TicketController extends Controller
         if ($this->isEventNear($event)) {
             return redirect()->back()->with('error', 'Sorry, you cannot purchase a ticket for this event as it is less than half a day away.');
         }
+
         if ($this->hasAvailableTickets($event)) {
             $this->createTicket($event, $userId);
             // Send email confirmation to the user
@@ -85,14 +86,14 @@ class TicketController extends Controller
     }
     public function createTicket($event, $userId)
     {
+        // Determine ticket status based on event mode
+        $ticketStatus = $event->mode === 'auto' ? 'approved' : 'pending';
         // Create a new ticket for the user
         $ticket = new Ticket();
         $ticket->event_id = $event->id;
         $ticket->user_id = $userId;
         $ticket->price = $event->ticket_price; // Set the ticket price based on the event
-        if ($event->mode == 'auto') {
-            $ticket->status = 'approved';
-        }
+        $ticket->status = $ticketStatus;
         $ticket->save();
     }
     protected function hasPurchasedTicket(Event $event, $userId)
