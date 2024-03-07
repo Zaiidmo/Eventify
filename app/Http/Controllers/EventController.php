@@ -6,6 +6,7 @@ use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Category;
 use App\Models\Event;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
@@ -22,7 +23,10 @@ class EventController extends Controller
     {
         $categories = Category::all();
         $events = Event::where('status', 'approved')->paginate(6);
-        return view('events.index', ['events' => $events , 'categories' => $categories]);
+        foreach ($events as $event) {
+            $this->calculateTheRemainingDays($event);
+        }
+        return view('events.index', ['events' => $events, 'categories' => $categories]);
     }
 
     /**
@@ -72,8 +76,9 @@ class EventController extends Controller
             // Redirect the user or display a message
             return redirect('/')->with('error', 'Unpublished Events Cannot be Reached.');
         }
-
-        return view('events.show', ['event' => $event, 'categories' => $categories]);
+        $remainihng_time = Carbon::parse($event->date)->diffForHumans();
+        // $remainingTime = Carboon::parse($event->date)->
+        return view('events.show', ['event' => $event, 'categories' => $categories, 'remainihng_time' => $remainihng_time]);
     }
 
     /**
@@ -157,5 +162,14 @@ class EventController extends Controller
 
         // If not authorized, redirect back with an error message
         return redirect()->back()->with('error', 'You are not authorized to deny events.');
+    }
+
+    public function calculateTheRemainingDays($event)
+    {
+        $eventDate = Carbon::parse($event->date);
+        $remainingTime = $eventDate->diffForHumans();
+
+        // Add remaining time to the event object
+        $event->remaining_time = $remainingTime;
     }
 }

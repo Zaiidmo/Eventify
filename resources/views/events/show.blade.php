@@ -65,7 +65,7 @@
                             <path fill="#ffffff"
                                 d="M5.25 9h3v2.25h-3zm0 3.75h3V15h-3zm0 3.75h3v2.25h-3zm5.25 0h3v2.25h-3zm0-3.75h3V15h-3zm0-3.75h3v2.25h-3zm5.25 7.5h3v2.25h-3zm0-3.75h3V15h-3zm0-3.75h3v2.25h-3z" />
                         </svg>
-                        <p class="text-white font-poppins text-lg">{{ $event->date }}</p>
+                        <p class="text-white font-poppins text-lg">{{ $event->date }} || {{ $remainihng_time }} </p>
                     </div>
                     <div class="flex justify-between gap-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
