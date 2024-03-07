@@ -37,8 +37,8 @@
                     <div class="flex flex-col mt-6 mx-4">
                         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="inline-block min-w-full py-2 align-middle md:pr-8 lg:pr-12">
-                                <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-                                    <table class="min-w-full divide-y mb-4 divide-gray-200 dark:divide-gray-700">
+                                <div class="overflow-hidden mb-4 border border-gray-200 dark:border-gray-700 md:rounded-lg">
+                                    <table class="min-w-full divide-y  divide-gray-200 dark:divide-gray-700">
                                         <thead class="bg-gray-950">
                                             <tr>
                                                 <th scope="col"
@@ -58,19 +58,6 @@
                                                     Created at</th>
                                                 <th scope="col"
                                                     class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-white">
-                                                    <button class="flex items-center gap-x-2">
-                                                        <span>Description</span>
-
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                            class="w-4 h-4">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
-                                                        </svg>
-                                                    </button>
-                                                </th>
-                                                <th scope="col"
-                                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-white">
                                                     Events Count </th>
                                                 <th scope="col" class="relative py-3.5 px-4">
                                                     <span class="sr-only">Edit</span>
@@ -78,6 +65,7 @@
                                             </tr>
                                         </thead>
                                         <tbody class="bg-black divide-y divide-gray-700  ">
+
                                             @foreach ($categories as $category)
                                                 <tr>
                                                     <td
@@ -88,12 +76,14 @@
 
                                                             <div class="flex items-center gap-x-2">
                                                                 <img class="object-cover w-10 h-10 rounded-full"
-                                                                    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+                                                                    src="{{ asset('storage/uploads/categories/' . $category->image) }}"
                                                                     alt="">
                                                                 <div>
                                                                     <h2 class="font-medium text-gray-800 dark:text-white ">
                                                                         {{ $category->name }}</h2>
-                                                                    {{-- <p class="text-sm font-normal text-gray-600 dark:text-gray-400">{{ $category->category->name }}</p> --}}
+                                                                    <p
+                                                                        class="text-sm font-normal text-gray-600 dark:text-gray-400">
+                                                                        {{ $category->description }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -103,9 +93,7 @@
                                                     <td
                                                         class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                                                         {{ $category->created_at }}</td>
-                                                    <td
-                                                        class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                                        {{ $category->description }}</td>
+
                                                     <td
                                                         class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                                                         {{ $category->events->count() }}</td>
@@ -123,7 +111,7 @@
                                                             </button>
 
                                                             <button
-                                                                class="text-gray-500 transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none">
+                                                                class="edit-category text-gray-500 transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 24 24" stroke-width="1.5"
                                                                     stroke="currentColor" class="w-5 h-5">
@@ -138,8 +126,8 @@
 
                                         </tbody>
                                     </table>
-                                    {{ $categories->links() }}
                                 </div>
+                                {{ $categories->links() }}
                             </div>
                         </div>
                     </div>
@@ -147,10 +135,8 @@
             </div>
         </div>
     </section>
-    </div>
-    </div>
-    </div>
-    </section>
+    
+    {{-- Modal To Create a Category --}}
     <section id="create-category-popup" class="hidden">
         <div id="create-category-popup-container"
             class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 overflow-auto">
@@ -207,7 +193,8 @@
                                             d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
                                     </svg>
 
-                                    <h2 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">Upload an image</h2>
+                                    <h2 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">Upload an
+                                        image</h2>
 
                                     <p class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">Upload or darg &
                                         drop your
@@ -220,6 +207,86 @@
                             <button type="submit"
                                 class="mt-8 py-2.5 w-full border-2 border-secondary text-lg font-poppins tracking-widest font-bold rounded-lg text-subtle">
                                 C R E A T E
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    {{-- Modal To Update a Category --}}
+    <section id="update-category-popup" class="hidden">
+        <div id="update-category-popup-container"
+            class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 overflow-auto">
+            <div class="bg-white shadow-md rounded-lg max-w-2xl my-16 w-full">
+
+                <div class="relative bg-black border-2 border-primary rounded-lg shadow">
+                    <button id="creation-popup-close" type="button"
+                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center popup-close"><svg
+                            aria-hidden="true" class="w-5 h-5" fill="#c6c7c7" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                cliprule="evenodd"></path>
+                        </svg>
+                        <span class="sr-only">Close popup</span>
+                    </button>
+
+                    <div class="p-5">
+
+                        <div class="text-center">
+                            <p class="mb-1 text-2xl font-semibold leading-10 text-subtle">
+                                Update Category : {{ $category->name }}
+                            </p>
+                        </div>
+
+                        <form class="mx-8 4 lg:mx-0 font-poppins font-semibold tracking-wide"
+                            action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="w-full mt-8">
+                                <label for="Category Name" class="block text-sm text-gray-500 dark:text-gray-300">Category
+                                    Name:</label>
+                                <input type="text" value="{{ $category->name }}" name="name"
+                                    class="block mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+                                    required />
+                            </div>
+
+                            <div class="mt-8">
+                                <label for="category-description"
+                                    class="block text-sm text-gray-500 dark:text-gray-300">Category Description: </label>
+                                <textarea id="category-description" name="description" placeholder="Add a tiny description "
+                                    class="block mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+                                    required></textarea>
+                            </div>
+
+                            <div class="mt-8 w-full">
+                                <label for="poster" class="block text-sm text-gray-500 dark:text-gray-300">Upload an
+                                    image</label>
+                                <label for="poster"
+                                    class="flex flex-col items-center w-full p-5 mt-2 text-center bg-gray-700 border-2 border-gray-200 border-dashed cursor-pointer rounded-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor"
+                                        class="w-8 h-8 text-gray-500 dark:text-gray-400">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                                    </svg>
+
+                                    <h2 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">Upload an
+                                        image</h2>
+
+                                    <p class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">Upload or darg &
+                                        drop your
+                                        file JPG, JPEG, PNG. </p> <input name="image" id="poster" type="file"
+                                        class="hidden" required />
+                                </label>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit"
+                                class="mt-8 py-2.5 w-full border-2 border-secondary text-lg font-poppins tracking-widest font-bold rounded-lg text-subtle">
+                                U P D A T E
                             </button>
                         </form>
                     </div>
