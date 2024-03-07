@@ -110,8 +110,8 @@
                                                                 </svg>
                                                             </button>
 
-                                                            <button
-                                                                class="edit-category text-gray-500 transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none">
+                                                            <button data-category-id="{{ $category->id }}" 
+                                                                class="edit-category text-gray-500 transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none" >
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 24 24" stroke-width="1.5"
                                                                     stroke="currentColor" class="w-5 h-5">
@@ -213,26 +213,23 @@
                 </div>
             </div>
         </div>
-
     </section>
 
     {{-- Modal To Update a Category --}}
-    <section id="update-category-popup" class="hidden">
+    @foreach($categories as $category)
+    <section id="update-category-popup-{{$category->id}}" class="hidden">
         <div id="update-category-popup-container"
             class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 overflow-auto">
             <div class="bg-white shadow-md rounded-lg max-w-2xl my-16 w-full">
 
                 <div class="relative bg-black border-2 border-primary rounded-lg shadow">
-                    <button id="creation-popup-close" type="button"
-                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center popup-close"><svg
-                            aria-hidden="true" class="w-5 h-5" fill="#c6c7c7" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                cliprule="evenodd"></path>
+                    <button id="update-popup-close" type="button" class="update-popup-close absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center popup-close">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="#c6c7c7" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" cliprule="evenodd"></path>
                         </svg>
                         <span class="sr-only">Close popup</span>
                     </button>
+                    
 
                     <div class="p-5">
 
@@ -245,6 +242,7 @@
                         <form class="mx-8 4 lg:mx-0 font-poppins font-semibold tracking-wide"
                             action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="w-full mt-8">
                                 <label for="Category Name" class="block text-sm text-gray-500 dark:text-gray-300">Category
                                     Name:</label>
@@ -293,11 +291,10 @@
                 </div>
             </div>
         </div>
-
     </section>
+    @endforeach
 
 @endsection
 @section('scripts')
     <script src="{{ mix('resources/js/categories.js') }}"></script>
-
 @endsection
