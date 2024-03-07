@@ -53,7 +53,7 @@
             <div class="my-5 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 @foreach($events as $event)
                 <a class="flex flex-col group bg-component border shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition "
-                    href="#">
+                    href="{{route('events.show', $event)}}">
                     <div class="relative pt-[50%] sm:pt-[60%]  rounded-t-xl overflow-hidden">
                         <img class=" absolute top-0 start-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl"
                             src="{{ asset('storage/uploads/events/' . $event->poster )}}" alt="Event Photo">
