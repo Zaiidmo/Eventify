@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateEventRequest;
 use App\Models\Category;
 use App\Models\Event;
 use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
@@ -22,11 +23,18 @@ class EventController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $events = Event::where('status', 'approved')->paginate(6);
-        foreach ($events as $event) {
-            $this->calculateTheRemainingDays($event);
+    $events = Event::where('status', 'approved')->paginate(6);
+    foreach ($events as $event) {
+        $eventDateTime = Carbon::parse($event->date);
+        $remainingTime = $eventDateTime->diffForHumans(now(), true);
+        
+        if ($eventDateTime->gt(now())) {
+            $event->remaining_time = 'In ' . $remainingTime;
+        } else {
+            $event->remaining_time = $remainingTime . ' ago';
         }
-        return view('events.index', ['events' => $events, 'categories' => $categories]);
+    }
+    return view('events.index', ['events' => $events, 'categories' => $categories]);
     }
 
     /**
@@ -76,9 +84,15 @@ class EventController extends Controller
             // Redirect the user or display a message
             return redirect('/')->with('error', 'Unpublished Events Cannot be Reached.');
         }
-        $remainihng_time = Carbon::parse($event->date)->diffForHumans();
-        // $remainingTime = Carboon::parse($event->date)->
-        return view('events.show', ['event' => $event, 'categories' => $categories, 'remainihng_time' => $remainihng_time]);
+
+        // Call your method to calculate remaining time
+        $remainingTimeString = $this->calculateTheRemainingDays($event);
+
+        return view('events.show', [
+            'event' => $event,
+            'categories' => $categories,
+            'remaining_time' => $remainingTimeString,
+        ]);
     }
 
     /**
@@ -166,10 +180,37 @@ class EventController extends Controller
 
     public function calculateTheRemainingDays($event)
     {
-        $eventDate = Carbon::parse($event->date);
-        $remainingTime = $eventDate->diffForHumans();
+        $eventDateTime = Carbon::parse($event->date . ' ' . $event->time);
+        $currentDateTime = Carbon::now();
 
-        // Add remaining time to the event object
-        $event->remaining_time = $remainingTime;
+        // Get the difference between the event datetime and current datetime
+        $diff = $eventDateTime->diff($currentDateTime);
+
+        // Extract individual components of the difference
+        $months = $diff->m;
+        $weeks = floor($diff->days / 7);
+        $days = $diff->d % 7;
+        $hours = $diff->h;
+
+        // Construct the remaining time string
+        $remainingTimeString = '';
+        if ($months > 0) {
+            $remainingTimeString .= "$months months";
+        }
+        if ($weeks > 0) {
+            $remainingTimeString .= " $weeks weeks";
+        }
+        if ($days > 0) {
+            $remainingTimeString .= " $days days";
+        }
+        if ($hours > 0) {
+            $remainingTimeString .= " $hours hours";
+        }
+        if (empty($remainingTimeString)) {
+            $remainingTimeString = 'less than an hour';
+        } else {
+            $remainingTimeString .= $eventDateTime->gt($currentDateTime) ? ' from now' : ' ago';
+        }
+        return $remainingTimeString;
     }
 }

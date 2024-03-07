@@ -41,21 +41,9 @@ class TicketController extends Controller
         if ($existingTicket) {
             return redirect()->back()->with('error', 'You have already purchased a ticket for this event.');
         }
-
         // Check if there are available tickets for the event
         if ($event->available_tickets > 0) {
-            // Create a new ticket for the user
-            $ticket = new Ticket();
-            $ticket->event_id = $event->id;
-            $ticket->user_id = $userId;
-            $ticket->price = $event->ticket_price; // Set the ticket price based on the event
-            if ($event->mode == 'auto') {
-                $ticket->status = 'approved';
-            }
-            $ticket->save();
-
-            // Decrease the available tickets count in the events table
-            $event->decrement('available_tickets');
+            $this->createTicket($event, $userId);
 
             // Send email confirmation to the user
             // Mail::to(auth()->user()->email)->send(new TicketPurchased($event));
@@ -96,5 +84,17 @@ class TicketController extends Controller
     public function destroy(Ticket $ticket)
     {
         //
+    }
+    public function createTicket($event, $userId)
+    {
+        // Create a new ticket for the user
+        $ticket = new Ticket();
+        $ticket->event_id = $event->id;
+        $ticket->user_id = $userId;
+        $ticket->price = $event->ticket_price; // Set the ticket price based on the event
+        if ($event->mode == 'auto') {
+            $ticket->status = 'approved';
+        }
+        $ticket->save();
     }
 }

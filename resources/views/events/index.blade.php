@@ -58,13 +58,21 @@
                         <img class=" absolute top-0 start-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl"
                             src="{{ asset('storage/uploads/events/' . $event->poster )}}" alt="Event Photo">
                     </div>
-                    <div class="p-4 md:p-5">
-                        <h3 class="text-lg font-bold text-white">
-                            {{ $event->title}}
-                        </h3>
-                        <p class="mt-1 text-subtle">
-                           Category : {{ $event->category->name }}
-                        </p>
+                    <div class="flex justify-between p-4 md:p-5">
+                        <div>
+                            <h3 class="text-lg font-bold text-white">
+                                {{ $event->title}}
+                            </h3>
+                            <p class="mt-1 text-subtle">
+                               Category : {{ $event->category->name }}
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">
+                                {{$event->remaining_time}}
+                            </h3>
+                            
+                        </div>
                     </div>
                 </a>
 
