@@ -7,9 +7,12 @@ We are writing to inform you that your ticket for the event **{{$ticket->event->
 Your ticket number is **{{$ticket->id}}**. <br>
 The new status is **{{$ticket->status}}**. <br>
 
-{{-- <x-mail::button :url="''">
-Button Text
-</x-mail::button> --}}
+@if ($ticket->event->mode === 'manual' && $ticket->status === 'approved')
+{
+<x-mail::button :url="''">
+Checkout and download your ticket
+</x-mail::button>
+}
 
 Thank You   ,<br>
 {{ config('app.name') }}
