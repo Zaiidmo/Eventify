@@ -48,6 +48,7 @@ class TicketController extends Controller
             // Send email confirmation to the user
             // Mail::to(auth()->user()->email)->send(new TicketPurchased($event));
             if ($ticket->status === 'approved') {
+                $event->decrement('available_tickets');
                 return redirect()->back()->with('success', 'Ticket purchased successfully!');
             } else {
                 return redirect()->back()->with('success', 'Ticket reserved successfully! Please wait for approval.');
@@ -125,6 +126,8 @@ class TicketController extends Controller
     $ticket = Ticket::find($ticketId);
     $ticket->status = 'approved';
     $ticket->save();
+    $event = $ticket->event;
+    $event->decrement('available_tickets');
     return redirect()->back();
     }
     public function denyReservation($ticketId)
