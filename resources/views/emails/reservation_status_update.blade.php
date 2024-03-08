@@ -8,11 +8,9 @@ Your ticket number is **{{$ticket->id}}**. <br>
 The new status is **{{$ticket->status}}**. <br>
 
 @if ($ticket->event->mode === 'manual' && $ticket->status === 'approved')
-{
-<x-mail::button :url="''">
-Checkout and download your ticket
-</x-mail::button>
-}
+    <x-mail::button :url="route('event.pay', ['event' => $ticket->event->id])">
+        Checkout and download your ticket
+    </x-mail::button>
 @endif
 
 Thank You   ,<br>
