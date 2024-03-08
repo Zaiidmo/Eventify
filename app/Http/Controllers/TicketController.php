@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
+use App\Mail\ReservationStatusUpdate;
 use App\Models\Event;
 use App\Models\Ticket;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 
 class TicketController extends Controller
@@ -49,6 +51,7 @@ class TicketController extends Controller
             // Mail::to(auth()->user()->email)->send(new TicketPurchased($event));
             if ($ticket->status === 'approved') {
                 $event->decrement('available_tickets');
+                Mail::to(auth()->user()->email)->send(new ReservationStatusUpdate($ticket));
                 return redirect()->back()->with('success', 'Ticket purchased successfully!');
             } else {
                 return redirect()->back()->with('success', 'Ticket reserved successfully! Please wait for approval.');
@@ -128,6 +131,7 @@ class TicketController extends Controller
     $ticket->save();
     $event = $ticket->event;
     $event->decrement('available_tickets');
+    Mail::to(auth()->user()->email)->send(new ReservationStatusUpdate($ticket));
     return redirect()->back();
     }
     public function denyReservation($ticketId)
