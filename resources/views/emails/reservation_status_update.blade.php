@@ -1,27 +1,16 @@
-{{-- <x-mail::message>
-# Introduction
+<x-mail::message>
+# Reservation Status Update
 
-The body of your message.
+Dear {{$ticket->user->name}},
 
-<x-mail::button :url="''">
+We are writing to inform you that your ticket for the event **{{$ticket->event->title}}** has been updated. <br>
+Your ticket number is **{{$ticket->id}}**. <br>
+The new status is **{{$ticket->status}}**. <br>
+
+{{-- <x-mail::button :url="''">
 Button Text
-</x-mail::button>
+</x-mail::button> --}}
 
-Thanks,<br>
+Thank You   ,<br>
 {{ config('app.name') }}
-</x-mail::message> --}}
-
-@component('mail::message')
-<div class="font-sans text-gray-800">
-    <h1 class="text-2xl font-bold text-gray-900 mb-4">Reservation Status Update</h1>
-    <p>Your reservation status has been updated.</p>
-
-    <div class="border-t border-gray-200 mt-4 pt-4">
-        <p class="text-gray-700"><strong>Event:</strong> {{ $ticket->event->title }}</p>
-        <p class="text-gray-700"><strong>New Status:</strong> {{ $ticket->status }}</p>
-    </div>
-
-    <p class="mt-4">Thank you,</p>
-    <p>{{ config('app.name') }}</p>
-</div>
-@endcomponent
+</x-mail::message>

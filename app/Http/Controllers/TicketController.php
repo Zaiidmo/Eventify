@@ -51,8 +51,8 @@ class TicketController extends Controller
             // Mail::to(auth()->user()->email)->send(new TicketPurchased($event));
             if ($ticket->status === 'approved') {
                 $event->decrement('available_tickets');
-                Mail::to(auth()->user()->email)->send(new ReservationStatusUpdate($ticket));
-                return redirect()->back()->with('success', 'Ticket purchased successfully!');
+                Mail::to($ticket->user->email)->send(new ReservationStatusUpdate($ticket));
+                return redirect()->back()->with('success', 'Ticket purchased successfully! Check your email for confirmation.');
             } else {
                 return redirect()->back()->with('success', 'Ticket reserved successfully! Please wait for approval.');
             }
@@ -126,19 +126,19 @@ class TicketController extends Controller
 
     public function approveReservation($ticketId)
     {
-    $ticket = Ticket::find($ticketId);
-    $ticket->status = 'approved';
-    $ticket->save();
-    $event = $ticket->event;
-    $event->decrement('available_tickets');
-    Mail::to(auth()->user()->email)->send(new ReservationStatusUpdate($ticket));
-    return redirect()->back();
+        $ticket = Ticket::find($ticketId);
+        $ticket->status = 'approved';
+        $ticket->save();
+        $event = $ticket->event;
+        $event->decrement('available_tickets');
+        Mail::to($ticket->user->email)->send(new ReservationStatusUpdate($ticket));
+        return redirect()->back();
     }
     public function denyReservation($ticketId)
     {
-    $ticket = Ticket::find($ticketId);
-    $ticket->status = 'denied';
-    $ticket->save();
-    return redirect()->back();
+        $ticket = Ticket::find($ticketId);
+        $ticket->status = 'denied';
+        $ticket->save();
+        return redirect()->back();
     }
 }
