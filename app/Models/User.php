@@ -23,7 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-    // 'role',
+        // 'role',
     ];
 
     /**
@@ -31,10 +31,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * The attributes that should be cast.
@@ -45,20 +42,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    
-    public function events(){
+
+    public function events()
+    {
         return $this->hasMany(Event::class);
     }
-    public function tickets(){
+    public function tickets()
+    {
         return $this->hasMany(Ticket::class);
     }
-    public function roles(){
+    public function roles()
+    {
         return $this->belongsToMany(Role::class, 'users_roles');
     }
     public function hasRole($role)
-{
-    return $this->roles()->where('name', $role)->exists();
-}
-
-    
+    {
+        return $this->roles()->where('name', $role)->exists();
+    }
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }
