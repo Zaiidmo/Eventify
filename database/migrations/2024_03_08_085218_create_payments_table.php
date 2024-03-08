@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onUpdate('cascade');
             $table->foreignId('event_id')->constrained()->onUpdate('cascade');
             $table->decimal('amount', 10, 2);
-            $table->enum('status', ['canceled', 'successful', 'failed']);
+            $table->enum('status', ['pending','canceled', 'paid', 'failed']);
             $table->string('transaction_id')->nullable();
             $table->timestamps();
         });

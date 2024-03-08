@@ -13,6 +13,7 @@ The new status is **{{$ticket->status}}**. <br>
 Checkout and download your ticket
 </x-mail::button>
 }
+@endif
 
 Thank You   ,<br>
 {{ config('app.name') }}

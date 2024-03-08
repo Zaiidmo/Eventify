@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TicketController;
 use App\Models\Category;
 use App\Models\Event;
@@ -72,6 +73,12 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/events/{event}/tickets', [TicketController::class, 'store'])->name('tickets.store');
     Route::put('/tickets/{ticket}/approve', [TicketController::class, 'approveReservation'])->name('tickets.approve');
-Route::put('/tickets/{ticket}/deny', 'TicketController@denyReservation')->name('tickets.deny');
+    Route::put('/tickets/{ticket}/deny', 'TicketController@denyReservation')->name('tickets.deny');
+});
 
+//Payment
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/payment/{event}/pay', [PaymentController::class, 'preparePayment'])->name('event.pay');
+    Route::get('/payment', [PaymentController::class, 'success'])->name('payment.success');
+    Route::get('/payment', [PaymentController::class, 'cancel'])->name('payment.cancel');
 });

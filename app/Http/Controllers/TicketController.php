@@ -52,7 +52,8 @@ class TicketController extends Controller
             if ($ticket->status === 'approved') {
                 $event->decrement('available_tickets');
                 Mail::to($ticket->user->email)->send(new ReservationStatusUpdate($ticket));
-                return redirect()->back()->with('success', 'Ticket purchased successfully! Check your email for confirmation.');
+                return redirect()->route('event.pay', $event)->with('success', 'Ticket reserved, please proceed to payment.');
+                // return redirect()->back()->with('success', 'Ticket purchased successfully! Check your email for confirmation.');
             } else {
                 return redirect()->back()->with('success', 'Ticket reserved successfully! Please wait for approval.');
             }
