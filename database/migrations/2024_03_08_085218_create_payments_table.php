@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('event_id')->constrained()->onUpdate('cascade');
             $table->decimal('amount', 10, 2);
             $table->enum('status', ['pending','canceled', 'paid', 'failed']);
-            $table->string('transaction_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

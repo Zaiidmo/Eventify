@@ -213,4 +213,8 @@ class EventController extends Controller
         }
         return $remainingTimeString;
     }
+
+    public function successfulPayment(){
+        return view('events.successPayment');
+    }
 }

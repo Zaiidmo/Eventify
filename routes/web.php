@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
     Route::put('/events/{event}/approve', [EventController::class, 'approve'])->name('events.approve');
     Route::put('/events/{event}/deny', [EventController::class, 'deny'])->name('events.deny');
+    Route::get('/events/tickets/successfulPayment', [EventController::class, 'successfulPayment'])->name('events.successPayment');
 });
 //Guests
 Route::group(['middleware' => 'guest'], function () {
@@ -79,6 +80,6 @@ Route::group(['middleware' => 'auth'], function () {
 //Payment
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/payment/{event}/pay', [PaymentController::class, 'preparePayment'])->name('event.pay');
-    Route::get('/payment', [PaymentController::class, 'success'])->name('payment.success');
-    Route::get('/payment', [PaymentController::class, 'cancel'])->name('payment.cancel');
+    Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+    Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
 });

@@ -23,7 +23,7 @@ class PaymentController extends Controller
                 'value' => $event->ticket_price . '.00', // Assuming ticket price is in whole dollars
             ],
             'description' => 'Ticket for Event: ' . $event->title,
-            'redirectUrl' => route('events.index'), // Adjust success route as needed
+            'redirectUrl' => route('payment.success'), // Adjust success route as needed
             'metadata' => [
                 'event_id' => $event->id,
             ],
@@ -63,7 +63,7 @@ class PaymentController extends Controller
             // Clear payment ID from session
             session()->forget('payment_id');
 
-            return redirect('/')->with('success', 'Your payment is successful!');
+            return redirect()->route('events.successPayment')->with('success', 'Your payment is successful!');
         }
 
         // If payment is not successful, redirect to failure page
