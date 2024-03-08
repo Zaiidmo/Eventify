@@ -74,7 +74,7 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/events/{event}/tickets', [TicketController::class, 'store'])->name('tickets.store');
     Route::put('/tickets/{ticket}/approve', [TicketController::class, 'approveReservation'])->name('tickets.approve');
-    Route::put('/tickets/{ticket}/deny', 'TicketController@denyReservation')->name('tickets.deny');
+    Route::put('/tickets/{ticket}/deny', [TicketController::class, 'denyReservation'])->name('tickets.deny');
 });
 
 //Payment

@@ -74,6 +74,6 @@ class PaymentController extends Controller
         $paymentId = session('payment_id');
         $userPayment = auth()->user()->payments()->where('payment_reference', $paymentId)->first();
         $userPayment->update(['status' => 'canceled']);
-        return redirect()->route('home')->with('error', 'Payment was canceled.');
+        return redirect('/')->with('error', 'Payment was canceled.');
     }
 }
