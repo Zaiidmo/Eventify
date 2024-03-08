@@ -26,39 +26,47 @@ class ResetPasswordController extends Controller
         $email = $request->email;
         $user = $this->userRepository->findByEmail($email);
         $token = $user->remember_token;
-        if(!empty($user)){
-            return view('Auth.resetPassword',compact('user'));
-        }else{
+        if (!empty($user)) {
+            return view('Auth.resetPassword', compact('user'));
+        } else {
             abort(404);
         }
     }
 
     public function forgotPassword(Request $request)
-{
-    $user = $this->userRepository->findByEmail($request->email);
+    {
+        $user = $this->userRepository->findByEmail($request->email);
 
-    if (!empty($user)) {
-        // Generate a new remember token
-        $user->update(['remember_token' => Str::random(30)]);
+        if (!empty($user)) {
+            // Generate a new remember token
+            $user->update(['remember_token' => Str::random(30)]);
 
-        // Send the password reset email
-        $user->sendPasswordResetNotification($user->remember_token);
+            // Send the password reset email
+            $user->sendPasswordResetNotification($user->remember_token);
 
-        return redirect()->back()->with('success', "Please check your email and reset your password");
-    } else {
-        return redirect()->route('forgot.view')->with('error', "User not found");
+            return redirect()->back()->with('success', 'Please check your email and reset your password');
+        } else {
+            return redirect()->route('forgot.view')->with('error', 'User not found');
+        }
     }
-}
     public function resetPassword(Request $request)
     {
-        if($request->password == $request->cpassword){
-            $user = User::getTokenSingle($request->remember_token);
-            $user->password = Hash::make($request->password);
-            $user->remember_token = Str::random(30);
-            $user->save();
-            redirect()->route('loginView')->with('success','pasword updated');
-        }else{
-            return redirect()->back()->with('error',"password and confirm password must match");
+        // dd($request->email);
+        $request->validate([
+            'email' => 'required|email', 
+            'password' => 'required|min:8',
+        ]);
+
+        $user = $this->userRepository->findByEmail($request->email);
+        if (!$user) {
+            return redirect()->back()->with('error', 'Invalid token or email');
         }
+
+        // Update the password
+        $user->password = Hash::make($request->password);
+        $user->remember_token = Str::random(30);
+        $user->save();
+
+        return redirect('/login')->with('success', 'Password updated successfully');
     }
 }
