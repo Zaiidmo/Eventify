@@ -119,4 +119,19 @@ class TicketController extends Controller
     {
         return $event->available_tickets > 0;
     }
+
+    public function approveReservation($ticketId)
+    {
+    $ticket = Ticket::find($ticketId);
+    $ticket->status = 'approved';
+    $ticket->save();
+    return redirect()->back();
+    }
+    public function denyReservation($ticketId)
+    {
+    $ticket = Ticket::find($ticketId);
+    $ticket->status = 'denied';
+    $ticket->save();
+    return redirect()->back();
+    }
 }
