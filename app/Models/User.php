@@ -42,6 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public static function getTokenSingle($token){
+        return self::where('remember_token', $token)->first();
+    }
 
     public function events()
     {

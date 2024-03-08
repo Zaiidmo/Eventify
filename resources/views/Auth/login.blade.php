@@ -8,6 +8,19 @@
         <div id="authentication-modal"  aria-hidden="true" class="flex fixed justify-center items-center w-full md:inset-0 max-h-full">
             <div class=" p-4 w-full max-w-md max-h-full">
                 <!-- Modal content -->
+                @if (session('success'))
+                    <div class="bg-green-100 mb-4 border border-green-400 text-green-700 px-4 py-3 rounded-lg relative "
+                        role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="bg-red-100 mb-4 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative "
+                        role="alert">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <div class=" bg-component rounded-xl shadow ">
                     <!-- Modal header -->
                          <h3 class="p-4 md:p-5 pb-1 md:pb-1 text-3xl font-semibold font-supermercado text-center text-gray-900 dark:text-white">
