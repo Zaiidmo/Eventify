@@ -27,6 +27,10 @@ Route::get('/', function () {
     $events = Event::where('status', 'approved')->latest()->take(4)->get();
     return view('welcome', ['events' => $events , 'topCategories' => $topCategories]);
 });
+Route::get('ticket', function () {
+    
+    return view('events.ticket');
+});
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -83,3 +87,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
     Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
 });
+
