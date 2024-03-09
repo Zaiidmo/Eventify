@@ -6,6 +6,9 @@ use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
 use App\Models\Event;
 use App\Models\Payment;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF;
+use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Request;
 use Mollie\Laravel\Facades\Mollie;
 
@@ -44,31 +47,58 @@ class PaymentController extends Controller
         return redirect($payment->getCheckoutUrl(), 303);
     }
     public function success(Request $request)
-    {
-        $paymentId = session('payment_id');
+{
+    $paymentId = session('payment_id');
 
-        // Retrieve payment information from Mollie
-        $payment = Mollie::api()->payments->get($paymentId);
+    // Retrieve payment information from Mollie
+    $payment = Mollie::api()->payments->get($paymentId);
 
-        // Check if payment is successful
-        if ($payment->isPaid()) {
-            // Retrieve associated payment record from database
-            $userPayment = auth()->user()->payments()->where('payment_reference', $paymentId)->first();
+    // Check if payment is successful
+    if ($payment->isPaid()) {
+        // Retrieve associated payment record from database
+        $userPayment = auth()->user()->payments()->where('payment_reference', $paymentId)->first();
 
-            // Update payment status to 'paid'
-            $userPayment->update(['status' => 'paid']);
+        // Update payment status to 'paid'
+        $userPayment->update(['status' => 'paid']);
 
-            // Optionally, update event ticket availability, generate ticket, or perform any other necessary actions
+        $eventId = $payment->metadata->event_id;
+        $event = Event::find($eventId);
 
-            // Clear payment ID from session
-            session()->forget('payment_id');
+        $data = [
+            'event' => $event,
+            'user' => auth()->user(),
+        ];
 
-            return redirect()->route('events.successPayment')->with('success', 'Your payment is successful!');
-        }
+        // Render the HTML view to a string
+        $view = view('events.ticket', $data)->render();
 
-        // If payment is not successful, redirect to failure page
-        return redirect()->route('failure')->with('error', 'Payment was not successful.');
+        // Instantiate Dompdf
+        $dompdf = new Dompdf();
+
+        // Load HTML content into Dompdf
+        $dompdf->loadHtml($view);
+
+        // Set paper size and orientation if needed
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the PDF
+        $dompdf->render();
+
+        // Output the generated PDF (force download)
+        return $dompdf->stream('ticket.pdf');
+
+        // Optionally, update event ticket availability, generate ticket, or perform any other necessary actions
+
+        // Clear payment ID from session
+        session()->forget('payment_id');
+
+        return redirect()->route('events.successPayment')->with('success', 'Your payment is successful!');
     }
+
+    // If payment is not successful, redirect to failure page
+    return redirect()->route('failure')->with('error', 'Payment was not successful.');
+}
+
     public function cancel(Request $request)
     {
         $paymentId = session('payment_id');

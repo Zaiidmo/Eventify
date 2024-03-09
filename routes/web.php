@@ -29,7 +29,7 @@ Route::get('/', function () {
 });
 Route::get('ticket', function () {
     
-    return view('events.ticket');
+    return view('events.ticket-pdf');
 });
 
 
