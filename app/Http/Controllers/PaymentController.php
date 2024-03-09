@@ -63,29 +63,9 @@ class PaymentController extends Controller
 
         $eventId = $payment->metadata->event_id;
         $event = Event::find($eventId);
+        $user = auth()->user();
 
-        $data = [
-            'event' => $event,
-            'user' => auth()->user(),
-        ];
-
-        // Render the HTML view to a string
-        $view = view('events.ticket', $data)->render();
-
-        // Instantiate Dompdf
-        $dompdf = new Dompdf();
-
-        // Load HTML content into Dompdf
-        $dompdf->loadHtml($view);
-
-        // Set paper size and orientation if needed
-        $dompdf->setPaper('A4', 'portrait');
-
-        // Render the PDF
-        $dompdf->render();
-
-        // Output the generated PDF (force download)
-        return $dompdf->stream('ticket.pdf');
+        $this->generateTicket($event,$user,$paymentId);
 
         // Optionally, update event ticket availability, generate ticket, or perform any other necessary actions
 
@@ -106,4 +86,25 @@ class PaymentController extends Controller
         $userPayment->update(['status' => 'canceled']);
         return redirect('/')->with('error', 'Payment was canceled.');
     }
+
+    public function generateTicket($event, $user , $paymentId){
+        // Render the HTML view to a string
+        $view = view('events.ticket-pdf', ['event'=>$event, 'user'=>$user , 'paymentId'=>$paymentId])->render();
+    
+        // Instantiate Dompdf
+        $dompdf = new Dompdf();
+    
+        // Load HTML content into Dompdf
+        $dompdf->loadHtml($view);
+    
+        // Set paper size and orientation if needed
+        $dompdf->setPaper('A4', 'portrait');
+    
+        // Render the PDF
+        $dompdf->render();
+    
+        // Output the generated PDF (force download)
+        return $dompdf->stream('ticket.pdf');
+    }
+    
 }
