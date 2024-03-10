@@ -9,6 +9,7 @@ use App\Models\Payment;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Barryvdh\DomPDF\PDF;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Support\Facades\Request;
 use Mollie\Laravel\Facades\Mollie;
 
@@ -47,37 +48,37 @@ class PaymentController extends Controller
         return redirect($payment->getCheckoutUrl(), 303);
     }
     public function success(Request $request)
-{
-    $paymentId = session('payment_id');
+    {
+        $paymentId = session('payment_id');
 
-    // Retrieve payment information from Mollie
-    $payment = Mollie::api()->payments->get($paymentId);
+        // Retrieve payment information from Mollie
+        $payment = Mollie::api()->payments->get($paymentId);
 
-    // Check if payment is successful
-    if ($payment->isPaid()) {
-        // Retrieve associated payment record from database
-        $userPayment = auth()->user()->payments()->where('payment_reference', $paymentId)->first();
+        // Check if payment is successful
+        if ($payment->isPaid()) {
+            // Retrieve associated payment record from database
+            $userPayment = auth()->user()->payments()->where('payment_reference', $paymentId)->first();
 
-        // Update payment status to 'paid'
-        $userPayment->update(['status' => 'paid']);
+            // Update payment status to 'paid'
+            $userPayment->update(['status' => 'paid']);
 
-        $eventId = $payment->metadata->event_id;
-        $event = Event::find($eventId);
-        $user = auth()->user();
+            $eventId = $payment->metadata->event_id;
+            $event = Event::find($eventId);
+            $user = auth()->user();
 
-        $this->generateTicket($event,$user,$paymentId);
+            $this->generateTicket($event, $user, $paymentId);
 
-        // Optionally, update event ticket availability, generate ticket, or perform any other necessary actions
+            // Optionally, update event ticket availability, generate ticket, or perform any other necessary actions
 
-        // Clear payment ID from session
-        session()->forget('payment_id');
+            // Clear payment ID from session
+            session()->forget('payment_id');
 
-        return redirect()->route('events.successPayment')->with('success', 'Your payment is successful!');
+            return redirect()->route('events.successPayment')->with('success', 'Your payment is successful!');
+        }
+
+        // If payment is not successful, redirect to failure page
+        return redirect()->route('failure')->with('error', 'Payment was not successful.');
     }
-
-    // If payment is not successful, redirect to failure page
-    return redirect()->route('failure')->with('error', 'Payment was not successful.');
-}
 
     public function cancel(Request $request)
     {
@@ -87,24 +88,26 @@ class PaymentController extends Controller
         return redirect('/')->with('error', 'Payment was canceled.');
     }
 
-    public function generateTicket($event, $user , $paymentId){
+    public function generateTicket($event, $user, $paymentId)
+    {
         // Render the HTML view to a string
-        $view = view('events.ticket-pdf', ['event'=>$event, 'user'=>$user , 'paymentId'=>$paymentId])->render();
-    
+        $view = view('events.ticket-pdf', ['event' => $event, 'user' => $user, 'paymentId' => $paymentId])->render();
+
         // Instantiate Dompdf
-        $dompdf = new Dompdf();
-    
+        $options = new Options();
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
+
         // Load HTML content into Dompdf
         $dompdf->loadHtml($view);
-    
+
         // Set paper size and orientation if needed
-        $dompdf->setPaper('A4', 'portrait');
-    
+        $dompdf->setPaper('A5', 'landscape');
+
         // Render the PDF
         $dompdf->render();
-    
+
         // Output the generated PDF (force download)
         return $dompdf->stream('ticket.pdf');
     }
-    
 }
