@@ -9,7 +9,7 @@
     <meta name="description" content="CHRIHdaba">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite('resources/css/app.css')
-    <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <title>@yield('title')</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

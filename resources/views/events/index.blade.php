@@ -11,71 +11,77 @@
                     <h1 class="text-5xl lg:text-7xl font-trade font-bold text-white text-center">Don't miss out !</h1>
                     <p class="text-xl lg:text-4xl font-bold font-yellowTTail text-white text-center">Explore the <span
                             class="text-secondary">vibrant events</span> happening locally and globally.</p>
-                    <div method="" id="search_bar" class="relative mb-8 w-full">
+                    <div id='search-form'>
                         <label
-                            class="mx-2 lg:mx-auto mt-8 relative bg-white min-w-sm max-w-2xl flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300"
+                            class="mx-auto mt-8 relative bg-white min-w-sm max-w-4xl flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300"
                             for="search-bar">
-                            <input type="search" id="search" placeholder="your keyword here" name=""
-                                class="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white" required="">
-                            <button type="submit" name="submit"
-                                class="w-full md:w-auto px-6 py-3 bg-primary-300 border-primary-100 text-black fill-white active:scale-95 duration-100 border will-change-transform overflow-hidden relative rounded-xl transition-all">
+                            <input id="search-bar" placeholder="Looking for something ?.." name="search"
+                                class="px-6 py-2 w-2/3 max-w-2xl rounded-md flex-1 outline-none bg-white" required="">
+                            <button id="search-button" type="submit"
+                                class="w-1/3 md:w-auto px-6 py-3 bg-primary-300 border-primary-100 text-black fill-white active:scale-95 duration-100 border border-black will-change-transform overflow-hidden relative rounded-xl transition-all">
                                 <div class="flex items-center transition-all opacity-1">
-                                    <span class="text-sm font-semibold whitespace-nowrap truncate mx-auto">
-                                        Search
-                                    </span>
+                                    <span class="text-sm font-semibold whitespace-nowrap truncate mx-auto">Search</span>
                                 </div>
                             </button>
+                            <select id="categories" name="categorie"
+                                class="w-1/3 md:w-auto px-6 py-2 text-primary-300 border-primary-100 fill-white active:scale-95 duration-100 border will-change-transform overflow-hidden relative rounded-xl transition-all">
+                                <option class="text-primary-300" value="" selected="">All</option>
+                                @foreach ($categories as $categorie)
+                                    <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
+                                @endforeach
+                            </select>
                         </label>
                     </div>
+
                 </div>
             </div>
         </div>
     </section>
-    <section>
+    {{-- <section>
         <div class="container px-6 py-16 mx-auto">
             <h1 class="text-4xl font-supermercado text-white">Explore Categories </h1>
             <div class="mt-5 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 ">
-                @foreach($categories as $category)
-                <div class="h-auto text-center flex flex-col gap-4 justify-between items-center">
-                    <img src="{{ asset('storage/uploads/categories/' . $category->image ) }}" alt="category Image" class="rounded-full border-secondary border w-24 h-24" />
-                    <a href="#">
-                        <h5 class="text-white font-poppins text-xl font-bold tracking-widest">{{ $category->name}}</h5>
-                    </a>
-                </div>
+                @foreach ($categories as $category)
+                    <div class="h-auto text-center flex flex-col gap-4 justify-between items-center">
+                        <img src="{{ asset('storage/uploads/categories/' . $category->image) }}" alt="category Image"
+                            class="rounded-full border-secondary border w-24 h-24" />
+                        <a href="#">
+                            <h5 class="text-white font-poppins text-xl font-bold tracking-widest">{{ $category->name }}</h5>
+                        </a>
+                    </div>
                 @endforeach
-                
+
             </div>
         </div>
-    </section>
+    </section> --}}
     <section>
         <div class="container px-6 py-16 mx-auto">
             <h1 class="text-4xl font-supermercado text-white">Up Coming Events </h1>
-            <div class="my-5 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                @foreach($events as $event)
-                <a class="flex flex-col group bg-component border shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition "
-                    href="{{route('events.show', $event)}}">
-                    <div class="relative pt-[50%] sm:pt-[60%]  rounded-t-xl overflow-hidden">
-                        <img class=" absolute top-0 start-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl"
-                            src="{{ asset('storage/uploads/events/' . $event->poster )}}" alt="Event Photo">
-                    </div>
-                    <div class="flex justify-between p-4 md:p-5">
-                        <div>
-                            <h3 class="text-lg font-bold text-white">
-                                {{ $event->title}}
-                            </h3>
-                            <p class="mt-1 text-subtle">
-                               Category : {{ $event->category->name }}
-                            </p>
+            <div id="events-container" class=" my-5 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                @foreach ($events as $event)
+                    <a class="flex flex-col group bg-component border shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition "
+                        href="{{ route('events.show', $event) }}">
+                        <div class="relative pt-[50%] sm:pt-[60%]  rounded-t-xl overflow-hidden">
+                            <img class=" absolute top-0 start-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl"
+                                src="{{ asset('storage/uploads/events/' . $event->poster) }}" alt="Event Photo">
                         </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-white">
-                                {{$event->remaining_time}}
-                            </h3>
-                            
-                        </div>
-                    </div>
-                </a>
+                        <div class="flex justify-between p-4 md:p-5">
+                            <div>
+                                <h3 class="text-lg font-bold text-white">
+                                    {{ $event->title }}
+                                </h3>
+                                <p class="mt-1 text-subtle">
+                                    Category : {{ $event->category->name }}
+                                </p>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white">
+                                    {{ $event->remaining_time }}
+                                </h3>
 
+                            </div>
+                        </div>
+                    </a>
                 @endforeach
             </div>
             {{ $events->links() }}
@@ -83,6 +89,8 @@
     </section>
 @endsection
 @section('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="{{ mix('resources/js/search.js') }}"></script>
     @auth
         <script src="{{ mix('resources/js/authNavbar.js') }}"></script>
     @endauth

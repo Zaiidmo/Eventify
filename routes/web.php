@@ -88,3 +88,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
 });
 
+//Search and Filter
+Route::get('/search', [EventController::class,'search'])->name('search');
+

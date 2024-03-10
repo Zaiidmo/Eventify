@@ -9,7 +9,7 @@ use App\Models\Event;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Http\Request;
 class EventController extends Controller
 {
     public function __construct()
@@ -216,5 +216,15 @@ class EventController extends Controller
 
     public function successfulPayment(){
         return view('events.successPayment');
+    }
+    public function search(Request $request)
+    {
+        $search = $request->input("search");
+        $events = Event::where('title', 'like', '%' . $search . '%')
+                        ->get();
+
+        return response()->json([
+            'events' => $events,
+        ]);
     }
 }
