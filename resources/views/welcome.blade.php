@@ -108,8 +108,11 @@
                         </div>
                     </div>
                     <div class="mr-4 gap-2 flex flex-col items-center justify-center text-gray-600 dark:text-white">
-                        <button class="text-md font-buttons border-2 border-primary rounded-full px-8 py-2">Buy
-                            Ticket</button>
+                        <form action="{{ route('tickets.store', $event)}}" method="POST">
+                            @csrf
+                            <button type="submit" class="text-md font-buttons border-2 border-primary rounded-full px-8 py-2">Buy
+                                Ticket</button>
+                        </form>
                         <a href="{{ route('events.show', $event) }}"
                             class="text-md font-buttons border-2 border-primary bg-primary rounded-full px-8 py-2">See
                             Details</a>
