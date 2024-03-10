@@ -89,5 +89,5 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 //Search and Filter
-Route::get('/search', [EventController::class,'search'])->name('search');
-
+// Route::post('/categoryFilter', [EventController::class, 'filterByCategorie'])->name('categoryFilter');
+Route::get('/search', [EventController::class, 'search'])->name('search');

@@ -217,14 +217,5 @@ class EventController extends Controller
     public function successfulPayment(){
         return view('events.successPayment');
     }
-    public function search(Request $request)
-    {
-        $search = $request->input("search");
-        $events = Event::where('title', 'like', '%' . $search . '%')
-                        ->get();
-
-        return response()->json([
-            'events' => $events,
-        ]);
-    }
+    
 }
