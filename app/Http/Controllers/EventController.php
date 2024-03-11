@@ -54,11 +54,13 @@ class EventController extends Controller
         if (!auth()->check()) {
             return redirect()->route('login'); // Redirect to login page if user is not authenticated
         }
-
+        // dd($request->all());
         $validatedData = $request->validated();
-        $fileName = time() . $request->name . '.' . $request->file('poster')->getClientOriginalName();
-        $request->poster->storeAs('public/uploads/events', $fileName);
-        $validatedData['poster'] = $fileName;
+        if ($request->hasFile('poster')) {
+            $fileName = time() . $request->name . '.' . $request->file('poster')->getClientOriginalName();
+            $request->poster->storeAs('public/uploads/events', $fileName);
+            $validatedData['poster'] = $fileName;
+        }
 
         $event = new Event($validatedData);
         $event->user()->associate(auth()->user());
@@ -215,23 +217,22 @@ class EventController extends Controller
     }
 
     public function search(Request $request)
-{
-    $keyword = $request->input('keyword');
-    $category = $request->input('category');
+    {
+        $keyword = $request->input('keyword');
+        $category = $request->input('category');
 
-    $events = Event::when($keyword, function ($query) use ($keyword) {
-                return $query->where('title', 'like', '%' . $keyword . '%');
-            })
+        $events = Event::when($keyword, function ($query) use ($keyword) {
+            return $query->where('title', 'like', '%' . $keyword . '%');
+        })
             ->when($category, function ($query) use ($category) {
                 return $query->where('category_id', $category);
             })
             ->paginate(3);
 
-    if ($request->ajax()) {
-        return view('events.data', compact('events'))->render();
+        if ($request->ajax()) {
+            return view('events.data', compact('events'))->render();
+        }
+
+        return view('events.index', compact('events'));
     }
-
-    return view('events.index', compact('events'));
-}
-
 }

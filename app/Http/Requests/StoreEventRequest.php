@@ -20,17 +20,18 @@ class StoreEventRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-{
-    return [
-        'title' => 'required|string|max:255',
-        'description' => 'required|string|min:25',
-        'date' => 'required|date',
-        'location' => 'required|string',
-        'image' => 'nullable|string',
-        'capacity' => 'required|integer|min:0',
-        'ticket_price' => 'required|numeric|min:0',
-        'mode' => 'required|in:auto,manual',
-        'category_id' => 'required|',
-    ];
-}
+    {
+        return [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|min:25',
+            'date' => 'required|date',
+            'location' => 'required|string',
+            'image' => 'nullable|string',
+            'capacity' => 'required|integer|min:0',
+            'ticket_price' => 'required|numeric|min:0',
+            'mode' => 'required|in:auto,manual',
+            'category_id' => 'required|',
+            'time' => 'required|date_format:H:i',
+        ];
+    }
 }
