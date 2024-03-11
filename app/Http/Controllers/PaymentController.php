@@ -91,12 +91,11 @@ class PaymentController extends Controller
 
     public function generateTicket($event, $user, $paymentId)
     {
-        $imagePath = 'public/qr-code.png'; // Path to your image file
-        $imageData = Storage::get($imagePath);
-        
+        $qrCode = 'public/qr-code.png'; // Path to your image file
+        $QrData = Storage::get($qrCode);
         // Encode the image data to base64
-        $imageBase64 = base64_encode($imageData);        // Render the HTML view to a string
-        $view = view('events.ticket-pdf', ['event' => $event, 'user' => $user, 'paymentId' => $paymentId , 'qrcode' => $imageBase64 ])->render();
+        $qrCode_64 = base64_encode($QrData);        // Render the HTML view to a string
+        $view = view('events.ticket-pdf', ['event' => $event, 'user' => $user, 'paymentId' => $paymentId , 'qrcode' => $qrCode_64 ])->render();
 
         // Instantiate Dompdf
         $options = new Options();

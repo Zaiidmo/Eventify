@@ -11,6 +11,7 @@
         rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Supermercado+One&family=Trade+Winds&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Trade+Winds&display=swap');
 
         body {
             color: #ffffff
@@ -18,7 +19,7 @@
 
         h1 {
             font-size: 70px;
-            font-family: 'Trade Winds', cursive;
+            font-family: 'Supermercado one', sans-serif;
         }
 
         table {
@@ -26,7 +27,7 @@
         }
 
         .ticket {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Trade Winds', sans-serif;
             max-width: 100%;
             max-height: 100%%;
             display: flex;
@@ -73,7 +74,7 @@
         h5 {
             font-family: 'Supermercado One', sans-serif;
         }
-
+        
         .date {
             font-size: 30px;
             line-height: 10px;
@@ -93,7 +94,8 @@
             font-size: 15px;
             color: #CCCCCC;
         }
-        img{
+
+        img {
             width: 120px;
             height: 120px;
         }
