@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
+use App\Mail\TicketEmail;
 use App\Models\Event;
 use App\Models\Payment;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Barryvdh\DomPDF\PDF;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 use Mollie\Laravel\Facades\Mollie;
 
 class PaymentController extends Controller
@@ -67,10 +70,9 @@ class PaymentController extends Controller
             $event = Event::find($eventId);
             $user = auth()->user();
 
-            $this->generateTicket($event, $user, $paymentId);
+            $pdf = $this->generateTicket($event, $user, $paymentId);
 
-            // Optionally, update event ticket availability, generate ticket, or perform any other necessary actions
-
+            Mail::to($user->email)->send(new TicketEmail($pdf));
             // Clear payment ID from session
             session()->forget('payment_id');
 
@@ -94,8 +96,10 @@ class PaymentController extends Controller
         $qrCode = 'public/qr-code.png'; // Path to your image file
         $QrData = Storage::get($qrCode);
         // Encode the image data to base64
-        $qrCode_64 = base64_encode($QrData);        // Render the HTML view to a string
-        $view = view('events.ticket-pdf', ['event' => $event, 'user' => $user, 'paymentId' => $paymentId , 'qrcode' => $qrCode_64 ])->render();
+        $qrCode_64 = base64_encode($QrData);
+
+        // Render the HTML view to a string
+        $view = View::make('events.ticket-pdf', ['event' => $event, 'user' => $user, 'paymentId' => $paymentId, 'qrcode' => $qrCode_64])->render();
 
         // Instantiate Dompdf
         $options = new Options();
@@ -111,13 +115,7 @@ class PaymentController extends Controller
         // Render the PDF
         $dompdf->render();
 
-        // Output the generated PDF (force download)
-        return $dompdf->stream('ticket.pdf');
+        // Return the generated PDF data
+        return $dompdf->output();
     }
-
 }
-
-// $path = public_path() . '/images/qr-code.png';
-// $type = pathinfo($path, PATHINFO_EXTENSION);
-// $data = file_get_contents($path);
-// $image = 'data:image/' . $type . ';base64' . base64_encode($data);
