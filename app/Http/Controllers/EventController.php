@@ -23,18 +23,18 @@ class EventController extends Controller
     public function index()
     {
         $categories = Category::all();
-    $events = Event::where('status', 'approved')->paginate(6);
-    foreach ($events as $event) {
-        $eventDateTime = Carbon::parse($event->date);
-        $remainingTime = $eventDateTime->diffForHumans(now(), true);
-        
-        if ($eventDateTime->gt(now())) {
-            $event->remaining_time = 'In ' . $remainingTime;
-        } else {
-            $event->remaining_time = $remainingTime . ' ago';
+        $events = Event::where('status', 'approved')->paginate(6);
+        foreach ($events as $event) {
+            $eventDateTime = Carbon::parse($event->date);
+            $remainingTime = $eventDateTime->diffForHumans(now(), true);
+
+            if ($eventDateTime->gt(now())) {
+                $event->remaining_time = 'In ' . $remainingTime;
+            } else {
+                $event->remaining_time = $remainingTime . ' ago';
+            }
         }
-    }
-    return view('events.index', ['events' => $events, 'categories' => $categories]);
+        return view('events.index', ['events' => $events, 'categories' => $categories]);
     }
 
     /**
@@ -214,8 +214,18 @@ class EventController extends Controller
         return $remainingTimeString;
     }
 
-    public function successfulPayment(){
-        return view('events.successPayment');
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        $events = Event::when($keyword, function ($query) use ($keyword) {
+            return $query->where('title', 'like', '%' . $keyword . '%');
+        })->paginate(3);
+
+        if ($request->ajax()) {
+            return view('events.data', compact('events'))->render();
+        }
+
+        return view('events.index', compact('events'));
     }
-    
 }
