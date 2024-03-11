@@ -63,14 +63,15 @@
                         class="group relative m-0 flex h-72 w-96 rounded-xl shadow-xl ring-gray-900/5 sm:mx-auto sm:max-w-lg">
                         <div
                             class="z-10 h-full w-full overflow-hidden rounded-xl border border-gray-200 opacity-80 transition duration-300 ease-in-out group-hover:opacity-100 dark:border-gray-700 dark:opacity-70">
-                            <img src="{{ asset('storage/uploads/categories/' . $Category->image) }}" 
+                            <img src="{{ asset('storage/uploads/categories/' . $Category->image) }}"
                                 class="animate-fade-in block h-full w-full scale-100 transform object-cover object-center opacity-100 transition duration-300 group-hover:scale-110"
                                 alt="{{ $Category->name }}" />
                         </div>
                         <div
                             class="absolute bottom-0 z-20 m-0 pb-4 ps-4 transition duration-300 ease-in-out group-hover:-translate-y-1 group-hover:translate-x-3 group-hover:scale-110">
                             <h1 class="font-poppins text-2xl font-bold text-white shadow-xl">{{ $Category->name }}</h1>
-                            <h1 class="text-sm font-light font-poppins text-gray-200 shadow-xl">{{ $Category->description }}</h1>
+                            <h1 class="text-sm font-light font-poppins text-gray-200 shadow-xl">{{ $Category->description }}
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -90,6 +91,19 @@
             </div>
         </div>
         <div class="flex flex-col gap-4">
+            @if (session('success'))
+                <div class="bg-green-100 mb-4 border border-green-400 text-green-700 px-4 py-3 rounded-lg relative "
+                    role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="bg-red-100 mb-4 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative "
+                    role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
             @foreach ($events as $event)
                 <div
                     class="flex w-full items-center justify-between rounded-2xl bg-transparent border-2 border-component p-3 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
@@ -108,9 +122,10 @@
                         </div>
                     </div>
                     <div class="mr-4 gap-2 flex flex-col items-center justify-center text-gray-600 dark:text-white">
-                        <form action="{{ route('tickets.store', $event)}}" method="POST">
+                        <form action="{{ route('tickets.store', $event) }}" method="POST">
                             @csrf
-                            <button type="submit" class="text-md font-buttons border-2 border-primary rounded-full px-8 py-2">Buy
+                            <button type="submit"
+                                class="text-md font-buttons border-2 border-primary rounded-full px-8 py-2">Buy
                                 Ticket</button>
                         </form>
                         <a href="{{ route('events.show', $event) }}"

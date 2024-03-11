@@ -27,8 +27,13 @@ $(document).ready(function() {
                 category: category // Include category filter
             },
             success: function(data) {
-                $('#event_container').html(data);
+                if (data.trim() == '') {
+                    $('#event_container').html('<p class="text-primary font-supermercado text-4xl">=== No events found ===</p>');
+                } else {
+                    $('#event_container').html(data);
+                }
             }
         });
     }
+    
 });

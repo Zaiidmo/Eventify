@@ -63,7 +63,7 @@ class AuthController extends Controller
         return redirect('/');
     } else {
         // Authentication failed
-        return back()->withInput()->withErrors(['email' => 'Invalid email or password']);
+        return redirect()->back()->with('error', 'Wrong Credentials or missing access rights to application');
     }
 }
 
