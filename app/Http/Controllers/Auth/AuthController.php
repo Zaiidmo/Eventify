@@ -37,10 +37,10 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         $data = $request->validated();
-        $data['password'] = Hash::make($request->password);
         // dd($data);
-
+        $data['password'] = Hash::make($request->password);
         $user = $this->userRepository->create($data);
+        $user->roles()->attach($data['role']);
 
         if (!$user) {
             return back()->with('error', 'Something went wrong');

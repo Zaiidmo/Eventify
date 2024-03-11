@@ -25,7 +25,7 @@ class RegisterRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:6',
-            'role' => 'required|in:manager,organizer,spectator',
+            'role' => 'required',
         ];
     }
 }

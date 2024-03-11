@@ -49,16 +49,16 @@
 
                             <div class="flex justify-evenly">
                                 <div class="flex items-center px-4 border border-gray-500 rounded ">
-                                    <input id="spectator" type="radio" value="spectator" name="role"
+                                    <input id="role_spectator" type="radio" value="3" name="role"
                                            class="w-4 h-4 text-primary bg-component border-component focus:ring-secondary ">
-                                    <label for="spectator"
+                                    <label for="role_spectator"
                                            class="w-full py-4 ms-2 text-sm font-medium text-subtle ">Spectator</label>
                                 </div>
                                 <div class="flex items-center px-4 border border-gray-500 rounded   ">
-                                    <input id="organizer" type="radio" value="organizer" name="role"
+                                    <input id="role_organizer" type="radio" value="1" name="role"
                                            class="w-4 h-4 text-primary bg-component border-component focus:ring-secondary ">
-                                    <label for="organizer"
-                                           class="w-full py-4 ms-2 text-sm font-medium text-subtle ">Organizer</label>
+                                    <label for="role_organizer"
+                                           class="w-full py-4 ms-2 text-sm font-medium text-subtle " >Organizer</label>
                                 </div>
                             </div>
 
