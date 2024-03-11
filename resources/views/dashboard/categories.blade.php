@@ -298,7 +298,7 @@
                                     <p class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">Upload or darg &
                                         drop your
                                         file JPG, JPEG, PNG. </p> <input name="image" id="poster" type="file"
-                                        class="hidden" required />
+                                        class="hidden"  />
                                 </label>
                             </div>
 

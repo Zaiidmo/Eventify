@@ -25,7 +25,7 @@ class AdminController extends Controller
         return view('dashboard.users', [
             'authUser' =>auth()->user(),
             'countUsers' =>User::count(),
-            'users' => User::all()
+            'users' => User::paginate(6),
         ]);
     }
     public function allEvents()
@@ -33,8 +33,21 @@ class AdminController extends Controller
         return view('dashboard.events', [
             'authUser' =>auth()->user(),
             'countEvents' =>Event::count(),
-            'events' => Event::all()
+            'events' => Event::paginate(7)
         ]);  
+    }
+    public function tickets()
+    {
+        return view('dashboard.tickets', [
+            'authUser' =>auth()->user(),
+            'countTickets' =>Ticket::count(),
+            'tickets' => Ticket::paginate(7)
+        ]);  
+    }
+    public function rolesAndPermissions(){
+        return view('dashboard.rolesAndPermissions', [
+            'authUser' =>auth()->user(),
+        ]);
     }
     public function account(){
         return view('dashboard.account', [

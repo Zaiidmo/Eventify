@@ -47,6 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
+    Route::get('roles', [AdminController::class, 'rolesAndPermissions'])->name('roles');
+    Route::get('tickets', [AdminController::class, 'tickets'])->name('tickets');
     Route::get('/account', [AdminController::class, 'account'])->name('account');
 });
 //Organizers {{Events Routes}}
