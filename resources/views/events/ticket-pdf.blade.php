@@ -93,6 +93,10 @@
             font-size: 15px;
             color: #CCCCCC;
         }
+        img{
+            width: 120px;
+            height: 120px;
+        }
     </style>
 </head>
 
@@ -112,7 +116,7 @@
                     </th>
                     <th colspan="3">
                         <div class="ticket-header">
-                            <h1>{{ $event->title }}</h1>
+                            <h1 class="event">{{ $event->title }}</h1>
                         </div>
                     </th>
                 </tr>
@@ -121,7 +125,8 @@
             <tbody>
                 <tr>
                     <td class="td-1">
-                        
+                        {{-- <img src="{{$qrcode}} alt="Eventify"> --}}
+                        <img src="data:image/png;base64,{{ $qrcode }}">
                     </td>
                     <td>
                         <div class="date">

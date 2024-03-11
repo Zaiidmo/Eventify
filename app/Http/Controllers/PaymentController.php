@@ -11,6 +11,7 @@ use Barryvdh\DomPDF\PDF;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Storage;
 use Mollie\Laravel\Facades\Mollie;
 
 class PaymentController extends Controller
@@ -90,8 +91,12 @@ class PaymentController extends Controller
 
     public function generateTicket($event, $user, $paymentId)
     {
-        // Render the HTML view to a string
-        $view = view('events.ticket-pdf', ['event' => $event, 'user' => $user, 'paymentId' => $paymentId])->render();
+        $imagePath = 'public/qr-code.png'; // Path to your image file
+        $imageData = Storage::get($imagePath);
+        
+        // Encode the image data to base64
+        $imageBase64 = base64_encode($imageData);        // Render the HTML view to a string
+        $view = view('events.ticket-pdf', ['event' => $event, 'user' => $user, 'paymentId' => $paymentId , 'qrcode' => $imageBase64 ])->render();
 
         // Instantiate Dompdf
         $options = new Options();
@@ -110,4 +115,10 @@ class PaymentController extends Controller
         // Output the generated PDF (force download)
         return $dompdf->stream('ticket.pdf');
     }
+
 }
+
+// $path = public_path() . '/images/qr-code.png';
+// $type = pathinfo($path, PATHINFO_EXTENSION);
+// $data = file_get_contents($path);
+// $image = 'data:image/' . $type . ';base64' . base64_encode($data);
