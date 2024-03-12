@@ -75,6 +75,8 @@ class CategoryController extends Controller
             $fileName = $request->name . '.' . $request->file('image')->getClientOriginalName();
             $request->image->storeAs('public/uploads/categories', $fileName);
             $validatedUpdatedData['image'] = $fileName;
+        } else {
+            $validatedUpdatedData['image'] = $category->image;
         }
         $category->update($validatedUpdatedData);
         return back();

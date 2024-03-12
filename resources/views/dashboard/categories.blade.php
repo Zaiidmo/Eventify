@@ -100,7 +100,8 @@
 
                                                     <td class="px-4 py-4 text-sm whitespace-nowrap">
                                                         <div class="flex items-center gap-x-6">
-                                                            <form action="{{ route('categories.destroy', $category)}}" method="POST">
+                                                            <form action="{{ route('categories.destroy', $category) }}"
+                                                                method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit"
@@ -175,8 +176,7 @@
                                                                             <input type="text"
                                                                                 value="{{ $category->name }}"
                                                                                 name="name" id="name"
-                                                                                class="block mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
-                                                                                required />
+                                                                                class="block mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40" />
                                                                         </div>
 
                                                                         <div class="mt-8">
@@ -184,29 +184,38 @@
                                                                                 class="block text-sm text-gray-500 dark:text-gray-300">Category
                                                                                 Description: </label>
                                                                             <textarea id="description" name="description" placeholder="Add a tiny description "
-                                                                                class="block mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
-                                                                                required>{{ $category->description }}</textarea>
+                                                                                class="block mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40">{{ $category->description }}</textarea>
                                                                         </div>
 
                                                                         <div class="mt-8 w-full">
-                                                                            <label for="poster" class="block text-sm text-gray-500 dark:text-gray-300">Upload an
+                                                                            <label for="poster"
+                                                                                class="block text-sm text-gray-500 dark:text-gray-300">Upload
+                                                                                an
                                                                                 image</label>
                                                                             <label for="poster"
                                                                                 class="flex flex-col items-center w-full p-5 mt-2 text-center bg-gray-700 border-2 border-gray-200 border-dashed cursor-pointer rounded-xl">
-                                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                                                    stroke-width="1.5" stroke="currentColor"
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                    fill="none" viewBox="0 0 24 24"
+                                                                                    stroke-width="1.5"
+                                                                                    stroke="currentColor"
                                                                                     class="w-8 h-8 text-gray-500 dark:text-gray-400">
-                                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                                    <path stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
                                                                                         d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
                                                                                 </svg>
-                                            
-                                                                                <h2 class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">Upload an
+
+                                                                                <h2
+                                                                                    class="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">
+                                                                                    Upload an
                                                                                     image</h2>
-                                            
-                                                                                <p class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">Upload or darg &
+
+                                                                                <p
+                                                                                    class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">
+                                                                                    Upload or darg &
                                                                                     drop your
-                                                                                    file JPG, JPEG, PNG. </p> <input name="image" id="poster" type="file"
-                                                                                    class="hidden" required />
+                                                                                    file JPG, JPEG, PNG. </p> <input
+                                                                                    name="image" id="poster"
+                                                                                    type="file" class="hidden" />
                                                                             </label>
                                                                         </div>
                                                                         <!-- Submit button -->
@@ -268,16 +277,14 @@
                                 <label for="Category Name" class="block text-sm text-gray-500 dark:text-gray-300">Category
                                     Name:</label>
                                 <input type="text" placeholder="Category X" name="name"
-                                    class="block mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
-                                    required />
+                                    class="block mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40" />
                             </div>
 
                             <div class="mt-8">
                                 <label for="category-description"
                                     class="block text-sm text-gray-500 dark:text-gray-300">Category Description: </label>
                                 <textarea id="category-description" name="description" placeholder="Add a tiny description "
-                                    class="block mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
-                                    required></textarea>
+                                    class="block mt-2 w-full placeholder-gray-500 rounded-lg border border-gray-200 bg-gray-700 px-5 py-2.5 text-subtle focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"></textarea>
                             </div>
 
                             <div class="mt-8 w-full">
@@ -298,7 +305,7 @@
                                     <p class="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">Upload or darg &
                                         drop your
                                         file JPG, JPEG, PNG. </p> <input name="image" id="poster" type="file"
-                                        class="hidden"  />
+                                        class="hidden" />
                                 </label>
                             </div>
 
