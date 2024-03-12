@@ -19,6 +19,13 @@ class UserRepository implements UserRepositoryInterface
     }
     public function login(array $credentials)
     {
+        $user = User::where('email', $credentials['email'])->first();
+        if (!$user) {
+            return null;
+        } 
+        if ($user->account_status === 'restricted') {
+            return null;
+        }
         // Attempt to authenticate the user
         if (Auth::attempt($credentials)) {
             // Authentication successful

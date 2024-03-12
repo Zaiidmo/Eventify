@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/users', [AdminController::class, 'users'])->name('users');
+    Route::put('/users/{user}/update-access', [AdminController::class, 'updateAccountStatus'])->name('update-access');
     Route::get('/eventsManagement', [AdminController::class, 'allEvents'])->name('eventsManagement');
     Route::get('/tickets', [AdminController::class, 'tickets'])->name('Tickets');
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
@@ -47,7 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
-    Route::get('roles', [AdminController::class, 'rolesAndPermissions'])->name('roles');
+    Route::get('roles', [AdminController::class, 'rolesManagement'])->name('roles');
     Route::get('tickets', [AdminController::class, 'tickets'])->name('tickets');
     Route::get('/account', [AdminController::class, 'account'])->name('account');
 });
