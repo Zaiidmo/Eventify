@@ -38,15 +38,16 @@ class TicketController extends Controller
 
         // Check if the user has already purchased a ticket for this event
         if ($this->hasPurchasedTicket($event, $userId)) {
-            if($event->mode === 'auto'){
+            if ($event->mode === 'auto') {
                 return redirect()->back()->with('error', 'You have already purchased a ticket for this event.');
-        } else {
-            return redirect()->back()->with('error', 'You have already reserved a ticket for this event, please keep checking your email for your reservation status.');
-        }
+            } else {
+                return redirect()->back()->with('error', 'You have already reserved a ticket for this event, please keep checking your email for your reservation status.');
+            }
 
-        if ($this->isEventNear($event)) {
-            return redirect()->back()->with('error', 'Sorry, you cannot purchase a ticket for this event as it is less than half a day away.');
-        }}
+            if ($this->isEventNear($event)) {
+                return redirect()->back()->with('error', 'Sorry, you cannot purchase a ticket for this event as it is less than half a day away.');
+            }
+        }
 
         if ($this->hasAvailableTickets($event)) {
             $ticket = $this->createTicket($event, $userId);

@@ -18,8 +18,19 @@ class AdminController extends Controller
     public function dashboard()
     {
         return view('dashboard.index', [
+            'countUsers' => User::count(),
+            'countOrganizers' => User::whereHas('roles', function ($query) {
+                $query->where('name', 'organizer');
+            })->count(),
+            'countEvents' => Event::where('status', 'approved')->count(),
+            'countTickets' => Ticket::count(),
+            'countPendingEvents' => Event::where('status', 'pending')->count(),
+
             'authUser' => auth()->user(),
-            'users' => User::all(),
+            'users' => User::latest()->take(5)->get(),
+            'events' => Event::latest()->take(5)->get(),
+            'tickets' => Ticket::latest()->take(5)->get(),
+
         ]);
     }
     public function users()
