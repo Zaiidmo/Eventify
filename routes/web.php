@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/users', [AdminController::class, 'users'])->name('users');
     Route::put('/users/{user}/update-access', [AdminController::class, 'updateAccountStatus'])->name('update-access');
+    Route::put('/users/{user}/managering', [AdminController::class, 'makeManager'])->name('make-manager');
     Route::get('/eventsManagement', [AdminController::class, 'allEvents'])->name('eventsManagement');
     Route::get('/tickets', [AdminController::class, 'tickets'])->name('Tickets');
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories');

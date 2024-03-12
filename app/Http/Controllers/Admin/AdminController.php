@@ -65,5 +65,10 @@ class AdminController extends Controller
         // Redirect back or return a response
         return redirect()->back()->with('success', 'User account status updated successfully');
     }
+    public function makeManager(Request $request, User $user){
+        $user->roles()->sync(Role::where('name', 'manager')->first());
+        
+        return redirect()->back()->with('success', 'User is now a Manager');
+    }
 
 }
