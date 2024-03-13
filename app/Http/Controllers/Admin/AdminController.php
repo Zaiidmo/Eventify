@@ -22,15 +22,16 @@ class AdminController extends Controller
             'countOrganizers' => User::whereHas('roles', function ($query) {
                 $query->where('name', 'organizer');
             })->count(),
+            'countManagers' => User::whereHas('roles', function ($query) {
+                $query->where('name', 'manager');
+            })->count(),
             'countEvents' => Event::where('status', 'approved')->count(),
-            'countTickets' => Ticket::count(),
+            'countTickets' => Ticket::where('status','approved')->count(),
             'countPendingEvents' => Event::where('status', 'pending')->count(),
 
             'authUser' => auth()->user(),
             'users' => User::latest()->take(5)->get(),
             'events' => Event::latest()->take(5)->get(),
-            'tickets' => Ticket::latest()->take(5)->get(),
-
         ]);
     }
     public function users()
