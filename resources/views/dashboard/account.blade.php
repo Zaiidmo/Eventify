@@ -31,13 +31,12 @@
                 @foreach ($authUser->events()->paginate(5) as $event)
                     <div class="flex justify-between py-4 mb-8 border-b border-components">
                         <div>
-                            <h3 class="text-blue-500 capitalize">{{ $event->title }}</h3>
-
                             <a href="{{ route('events.show', $event->id) }}"
                                 class="block mt-2 font-medium text-gray-700 hover:underline hover:text-gray-500 dark:text-gray-400 ">
-                                {{ $event->description }}
-                            </a>
-                        </div>
+                                <h3 class="text-subtle capitalize">{{ $event->title }}</h3>                            </a>
+                                <h1 class="text-gray-400 font-poppins text-xs ">Posted At : {{ $event->created_at }}</h1>
+                            </div>
+                            
                         <div class="flex flex-col gap-2">
                             <span
                                 class="inline-flex items-center rounded-md bg- font-poppins px-2 py-1 text-xs font-medium text-subtle ring-1 ring-inset ring-gray-500/10">{{ $event->status }}</span>
