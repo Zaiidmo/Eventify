@@ -90,8 +90,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/payment/{event}/pay', [PaymentController::class, 'preparePayment'])->name('event.pay');
     Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
     Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
+    Route::get('/eventsSuccess', function(){
+        return view('events.successPayment');
+    })->name('successfullPayment');
 });
 
 //Search and Filter
 // Route::post('/categoryFilter', [EventController::class, 'filterByCategorie'])->name('categoryFilter');
 Route::get('/search', [EventController::class, 'search'])->name('search');
+

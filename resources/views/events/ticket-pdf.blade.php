@@ -18,7 +18,7 @@
         }
 
         h1 {
-            font-size: 70px;
+            font-size: 30px;
             font-family: 'Supermercado one', sans-serif;
         }
 

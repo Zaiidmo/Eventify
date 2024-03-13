@@ -76,7 +76,7 @@ class PaymentController extends Controller
             // Clear payment ID from session
             session()->forget('payment_id');
 
-            return redirect()->route('events.successPayment')->with('success', 'Your payment is successful!');
+            return redirect()->route('successfullPayment')->with('success', 'Your payment is successful!');
         }
 
         // If payment is not successful, redirect to failure page
