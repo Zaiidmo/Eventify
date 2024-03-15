@@ -35,10 +35,11 @@ To set up Eventify, follow these steps:
      ```
 5. **Configure Mailer** 
    - Generate an app password from your  email provider (Gmail) for security reasons.
-   - Go to `.env` file in the root folder of the project and edit the following lines : 
+   - Go to `.env` file in the root folder of the project and edit the following lines:
+    ``` bash 
     `MAIL_USERNAME=your_email@gmail.com` <br>
     `MAIL_PASSWORD=app'
-
+    ```
 
 ## Eventify Features
 
